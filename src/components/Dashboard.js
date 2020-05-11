@@ -60,9 +60,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
+    backgroundColor: theme.palette.info.main,
     ...theme.mixins.toolbar,
   },
   appBar: {
+    backgroundColor: theme.palette.info.main,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -231,6 +233,7 @@ export default function Dashboard() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
 
@@ -290,7 +293,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Dashboard
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

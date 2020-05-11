@@ -9,12 +9,15 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
+      <Tooltip title="Dashboard" placement="right">
         <DashboardIcon />
+        </Tooltip>
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
