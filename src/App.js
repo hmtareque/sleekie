@@ -1,11 +1,12 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
-    <div>
-      <p>Sleekie Admin Panel</p>
-    </div>
+    <Dashboard/>
   );
 }
+
 
 export default App;
