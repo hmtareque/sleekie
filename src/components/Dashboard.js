@@ -58,13 +58,13 @@ const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+  //  justifyContent: 'flex-end',
     padding: '0 8px',
     backgroundColor: theme.palette.info.main,
     ...theme.mixins.toolbar,
   },
   appBar: {
-    backgroundColor: theme.palette.info.main,
+    backgroundColor: theme.palette.info.dark,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -188,7 +188,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -293,7 +293,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Dashboard
+            APP NAME
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -357,7 +357,8 @@ export default function Dashboard() {
         open={open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
+          <span style={{color: 'white', padding: '10px', float: 'left', width: '200px', fontSize: '18npx', fontWeight: 'bold'}}>test</span>
+          <IconButton onClick={handleDrawerClose} style={{float: 'right', color: 'white'}}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
