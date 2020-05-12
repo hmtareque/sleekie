@@ -55,14 +55,21 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-  //  justifyContent: 'flex-end',
-    padding: '0 8px',
-    backgroundColor: theme.palette.info.main,
-    ...theme.mixins.toolbar,
-  },
+  toolbarIcon: {float: 'right', color: 'white'},
+
+ drawerToolbar: {
+  display: 'flex',
+  alignItems: 'center',
+//  justifyContent: 'flex-end',
+  padding: '0 8px',
+
+  backgroundColor: theme.palette.info.main,
+  ...theme.mixins.toolbar,
+ },
+
+ appName: {color: 'white', padding: '10px', float: 'left', width: '200px', fontSize: '18npx', fontWeight: 'bold'},
+
+
   appBar: {
     backgroundColor: theme.palette.info.dark,
     zIndex: theme.zIndex.drawer + 1,
@@ -356,9 +363,9 @@ export default function Dashboard() {
         }}
         open={open}
       >
-        <div className={classes.toolbarIcon}>
-          <span style={{color: 'white', padding: '10px', float: 'left', width: '200px', fontSize: '18npx', fontWeight: 'bold'}}>test</span>
-          <IconButton onClick={handleDrawerClose} style={{float: 'right', color: 'white'}}>
+        <div className={classes.drawerToolbar}>
+          <span className={classes.appName}>test</span>
+          <IconButton onClick={handleDrawerClose} className={classes.toolbarIcon}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
