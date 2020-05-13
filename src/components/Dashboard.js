@@ -55,19 +55,29 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
-  toolbarIcon: {float: 'right', color: 'white'},
+  toolbarIcon: {
+    float: 'right',
+    color: 'white'
+  },
 
- drawerToolbar: {
-  display: 'flex',
-  alignItems: 'center',
-//  justifyContent: 'flex-end',
-  padding: '0 8px',
+  drawerToolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    //  justifyContent: 'flex-end',
+    padding: '0 8px',
 
-  backgroundColor: theme.palette.info.main,
-  ...theme.mixins.toolbar,
- },
+    backgroundColor: theme.palette.info.main,
+    ...theme.mixins.toolbar,
+  },
 
- appName: {color: 'white', padding: '10px', float: 'left', width: '200px', fontSize: '18npx', fontWeight: 'bold'},
+  appName: {
+    color: 'blank',
+    padding: '10px',
+    float: 'left',
+    width: '200px',
+    fontSize: '18npx',
+    fontWeight: 'bold'
+  },
 
 
   appBar: {
@@ -352,7 +362,7 @@ export default function Dashboard() {
           </div>
         </Toolbar>
       </AppBar>
-      
+
       {renderMobileMenu}
       {renderMenu}
 
