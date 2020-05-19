@@ -82,6 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
   appBar: {
     backgroundColor: theme.palette.info.dark,
+    boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -384,6 +385,7 @@ export default function Dashboard() {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
+
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -412,6 +414,7 @@ export default function Dashboard() {
           </Box>
         </Container>
       </main>
+
     </div>
   );
 }

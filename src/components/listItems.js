@@ -10,42 +10,36 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
+import { fade, makeStyles } from '@material-ui/core/styles';
+
+
+import { styled } from '@material-ui/core/styles';
+
+const MainListItem = styled(ListItem)({
+  paddingLeft: '24px',
+});
+
+
+const list = [
+  {name : 'Dashboard', 'link': 'link', icon: <ShoppingCartIcon color="primary"/>},
+  {name : 'Orders', 'link': 'link', icon: <PeopleIcon />},
+  {name : 'Customers', 'link': 'link', icon: <LayersIcon />},
+  {name : 'Reports', 'link': 'link', icon: <BarChartIcon />},
+];
 
 export const mainListItems = (
-  <div>
-    <ListItem button>
+  <React.Fragment>
+    {list.map((item, index) => {
+      return <MainListItem key={index} button>
+        
       <ListItemIcon>
-      <Tooltip title="Dashboard" placement="right">
-        <DashboardIcon />
-        </Tooltip>
+      <Tooltip title={item.name} placement="right-start">{item.icon}</Tooltip>
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
-  </div>
+      
+      <ListItemText primary={item.name} />
+    </MainListItem>
+    })}
+  </React.Fragment>
 );
 
 export const secondaryListItems = (
