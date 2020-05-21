@@ -27,8 +27,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 
-
-import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
@@ -37,8 +35,6 @@ import MUITestForm from './forms/MUITestForm';
 import FormikForm from './forms/FormikForm';
 import SignupForm from './forms/signup.form';
 import TestForm from './forms/test.form';
-
-import NavBar from '../components/NavBar';
 
 function Copyright() {
   return (
@@ -114,26 +110,7 @@ const useStyles = makeStyles((theme) => ({
   menuButtonHidden: {
     display: 'none',
   },
-  drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
-  },
+
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -210,7 +187,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function NavBar() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -303,8 +280,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
+    <div>
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -341,7 +317,7 @@ export default function Dashboard() {
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={'9+'} color="secondary">
+              <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -372,58 +348,6 @@ export default function Dashboard() {
 
       {renderMobileMenu}
       {renderMenu}
-
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.drawerToolbar}>
-          
-          <IconButton onClick={handleDrawerClose} className={classes.toolbarIcon}>
-            <ChevronLeftIcon />
-          </IconButton>
-         
-
-          <Typography className={classes.appName} variant="h6" noWrap>
-            APP NAME
-          </Typography>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.paper}>
-            
-            <SignupForm />
-          </Paper>
-        </Grid>
-          
-           
-           {/* <MUITestForm />
-
-           <FormikForm /> */}
-
-           {/* <TestForm /> */}
-
-           
-          
-          
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
-
     </div>
   );
 }

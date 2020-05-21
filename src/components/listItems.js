@@ -19,9 +19,16 @@ const MainListItem = styled(ListItem)({
   paddingLeft: '24px',
 });
 
+const DrawerListItemIcon = styled(ListItemIcon)({
+  color: 'rgba(0, 0, 0, 0.54)',
+    display: 'inline-flex',
+    minWidth: '48px',
+    flexShrink: 0,
+});
+
 
 const list = [
-  {name : 'Dashboard', 'link': 'link', icon: <ShoppingCartIcon color="primary"/>},
+  {name : 'Dashboard', 'link': 'link', icon: <ShoppingCartIcon />},
   {name : 'Orders', 'link': 'link', icon: <PeopleIcon />},
   {name : 'Customers', 'link': 'link', icon: <LayersIcon />},
   {name : 'Reports', 'link': 'link', icon: <BarChartIcon />},
@@ -32,9 +39,9 @@ export const mainListItems = (
     {list.map((item, index) => {
       return <MainListItem key={index} button>
         
-      <ListItemIcon>
+      <DrawerListItemIcon>
       <Tooltip title={item.name} placement="right-start">{item.icon}</Tooltip>
-      </ListItemIcon>
+      </DrawerListItemIcon>
       
       <ListItemText primary={item.name} />
     </MainListItem>

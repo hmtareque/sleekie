@@ -33,16 +33,9 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 
-import MUITestForm from './forms/MUITestForm';
-import FormikForm from './forms/FormikForm';
-import SignupForm from './forms/signup.form';
-import TestForm from './forms/test.form';
-
-import NavBar from '../components/NavBar';
-
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="left">
+    <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
@@ -63,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 24, // keep right padding when drawer closed
   },
   toolbarIcon: {
-    color: theme.palette.info.dark,
+    color: theme.palette.primary
 
   },
 
@@ -78,11 +71,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appName: {
-    color: theme.palette.info.dark,
+    color: 'blank',
     padding: '8px 5px',
     width: '200px',
-    fontWeight: 'bold',
-
+    fontWeight: 'bold'
   },
 
 
@@ -341,7 +333,7 @@ export default function Dashboard() {
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={'9+'} color="secondary">
+              <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -400,24 +392,26 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.paper}>
-            
-            <SignupForm />
-          </Paper>
-        </Grid>
-          
-           
-           {/* <MUITestForm />
-
-           <FormikForm /> */}
-
-           {/* <TestForm /> */}
-
-           
-          
-          
+          <Grid container spacing={3}>
+            {/* Chart */}
+            <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}>
+                <Chart />
+              </Paper>
+            </Grid>
+            {/* Recent Deposits */}
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <Deposits />
+              </Paper>
+            </Grid>
+            {/* Recent Orders */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Orders />
+              </Paper>
+            </Grid>
+          </Grid>
           <Box pt={4}>
             <Copyright />
           </Box>
