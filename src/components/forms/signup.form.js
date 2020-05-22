@@ -8,11 +8,14 @@ import Paper from '@material-ui/core/Paper';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { green } from '@material-ui/core/colors';
+import { green, blue } from '@material-ui/core/colors';
 import Fab from '@material-ui/core/Fab';
 import CheckIcon from '@material-ui/icons/Check';
 import SaveIcon from '@material-ui/icons/Save';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+
+import Backdrop from '@material-ui/core/Backdrop';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 import {
   Card,
@@ -80,6 +83,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: -12,
   },
 
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: fade(blue[100], 0.5),
+    color: blue[800],
+  },
+
   // lineProgress: {
   //   display: 'block',
   //   width: '100%',
@@ -115,6 +124,14 @@ const SignupForm = () => {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
   
 
 
@@ -137,6 +154,7 @@ const SignupForm = () => {
 
         setSuccess(false);
         setLoading(true);
+        setOpen(true);
 
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -144,6 +162,7 @@ const SignupForm = () => {
 
           setSuccess(true);
         setLoading(false);
+        setOpen(false);
 
 
         }, 5000);
@@ -239,7 +258,9 @@ fullWidth
         </form>
   
 
-        
+
+ 
+
          
           
       )}
@@ -248,7 +269,9 @@ fullWidth
     </Formik>
 
    
-
+  <Backdrop className={classes.backdrop} open={open}>
+    <CircularProgress color="inherit" />
+  </Backdrop>
     
 
     </Card>
