@@ -38,7 +38,7 @@ import FormikForm from './forms/FormikForm';
 import SignupForm from './forms/signup.form';
 import TestForm from './forms/test.form';
 
-import NavBar from '../components/NavBar';
+import MaterialTableDemo from '../components/tables/full.table';
 
 function Copyright() {
   return (
@@ -407,6 +407,8 @@ export default function Dashboard() {
             <SignupForm />
           </Paper>
         </Grid>
+
+        <MaterialTableDemo />
           
            
            {/* <MUITestForm />
