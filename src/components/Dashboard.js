@@ -402,13 +402,12 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
 
         <Grid item xs={12} md={6}>
-          <Paper className={classes.paper}>
-            
+          
             <SignupForm />
-          </Paper>
+          
         </Grid>
 
-        <MaterialTableDemo />
+        {/* <MaterialTableDemo /> */}
           
            
            {/* <MUITestForm />

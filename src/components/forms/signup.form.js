@@ -1,10 +1,8 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { styled } from '@material-ui/core/styles';
 import * as Yup from 'yup';
-import Grid from '@material-ui/core/Grid';
+
 import Paper from '@material-ui/core/Paper';
 
 import clsx from 'clsx';
@@ -15,6 +13,17 @@ import Fab from '@material-ui/core/Fab';
 import CheckIcon from '@material-ui/icons/Check';
 import SaveIcon from '@material-ui/icons/Save';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Divider,
+  Grid,
+  Button,
+  TextField
+} from '@material-ui/core';
 
 
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -35,32 +44,33 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     width: '25ch',
   },
-  submitButton: {
+
+  wrapper: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(2),
-    width: '100%',
-
-
+    position: 'relative',
+  },
+  // submitButton: {
+   
   // '&:hover': {
-  //   background: 'blue',
-  //   color: 'white',
+  //   background: theme.palette.blue,
+  //   color: theme.palette.blue,
 
   // }
-  },
+  // },
 
-  buttonSuccess: {
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[700],
-    },
-  },
-  fabProgress: {
-    color: green[500],
-    position: 'absolute',
-    top: -6,
-    left: -6,
-    zIndex: 1,
-  },
+  // buttonSuccess: {
+  //   backgroundColor: green[500],
+  //   '&:hover': {
+  //     backgroundColor: green[700],
+  //   },
+  // },
+  // fabProgress: {
+  //   color: green[500],
+  //   position: 'absolute',
+  //   top: -6,
+  //   left: -6,
+  //   zIndex: 1,
+  // },
   buttonProgress: {
     color: green[500],
     position: 'absolute',
@@ -70,20 +80,21 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: -12,
   },
 
-  lineProgress: {
-    width: '100%',
-    '& > * + *': {
-      margin: theme.spacing(2),
-    },
-    padding: '10px'
-  },
+  // lineProgress: {
+  //   display: 'block',
+  //   width: '100%',
+  //   '& > * + *': {
+  //     margin: theme.spacing(2),
+  //   },
+  //   padding: '10px'
+  // },
 
-  circleSpin: {
-    display: 'flex',
-    '& > * + *': {
-      marginLeft: theme.spacing(2),
-    },
-  },
+  // circleSpin: {
+  //   display: 'flex',
+  //   '& > * + *': {
+  //     marginLeft: theme.spacing(2),
+  //   },
+  // },
 
 }));
 
@@ -108,8 +119,14 @@ const SignupForm = () => {
 
 
 
-    return   (<div>
-   <h3 className={classes.formName}>Signup</h3>
+    return   (
+
+
+<Card>
+     
+
+
+
     <Formik
       initialValues={{
         name: '',
@@ -139,63 +156,92 @@ const SignupForm = () => {
         handleBlur,
         handleSubmit,
         isSubmitting }) => (
-        <Form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off">
-        
-           
-          <div>
 
-         
 
-     
-          <TextField
-          name="name"
-          label="Name"
-          id="standard-required"
-          defaultValue={values.name}
-          className={classes.textField}
-          helperText={errors.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.name && touched.name ? true : null}
-        />
+          <form
+          onSubmit={handleSubmit} noValidate autoComplete="off"
+        >
+          <CardHeader
+            subheader="The information can be edited"
+            title="Profile"
+          />
+          <Divider />
+          <CardContent>
+            <Grid
+              container
+              spacing={3}
+            >
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
 
 <TextField
+ fullWidth
           name="email"
           label="Email Address"
-          id="standard-required"
-          defaultValue={values.email}
-          className={classes.textField}
+          
+          value={values.email}
+          
           helperText={errors.email}
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.email && touched.email ? true : null}
         />
+                
+                
+              </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+
+<TextField
+fullWidth
+          name="name"
+          label="Name"
+          value={values.name}
+          helperText={errors.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.name && touched.name ? true : null}
+        />
+                
+              </Grid>
+            </Grid>
+          </CardContent>
+          <Divider />
+          <CardActions>
 
 
-          </div>
+          <div className={classes.wrapper}>
+        <Button
+          color="primary"
+          size="large"
+          variant="outlined"
+          disabled={loading}
+          onClick={handleSubmit}
+        //  className={classes.submitButton}
+          startIcon={<SaveIcon />}
+        >
+        { isSubmitting ? 'Saving ...'  : 'Save'}
+        </Button>
+        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+      </div>
+            
+
+
+            
+
+          </CardActions>
+        </form>
+  
+
         
          
           
-
-
-<div className={classes.submitButton}>
-<Button
-          aria-label="save"
-          color="primary"
-          variant="outlined"
-          size="large"
-          
-          onClick={handleSubmit}
-          startIcon={<SaveIcon />}
-        >
-          {isSubmitting ? 'Saving ...'  : 'Save'}
-        </Button>
-        
-</div>
-
-{isSubmitting ? <div className={classes.lineProgress}><LinearProgress /></div> : ''}
-
-        </Form>
       )}
 
 
@@ -205,9 +251,9 @@ const SignupForm = () => {
 
     
 
+    </Card>
 
 
-  </div>
 );
 }
 

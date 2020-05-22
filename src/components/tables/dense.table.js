@@ -26,12 +26,12 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export default function SimpleTable() {
+export default function DenseTable() {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Dessert (100g serving)</TableCell>
