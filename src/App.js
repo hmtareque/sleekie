@@ -1,9 +1,16 @@
 import React from 'react';
 import Dashboard from './components/Dashboard';
+import Table from './components/Table';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <Dashboard/>
+    
+    <Switch>
+      <Route path="/" component={Dashboard} exact />
+      <Route path="/table" component={Table} exact />
+                
+    </Switch>
   );
 }
 

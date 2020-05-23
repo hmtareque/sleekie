@@ -12,6 +12,8 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
+import { Link } from 'react-router-dom';
+
 
 import { styled } from '@material-ui/core/styles';
 
@@ -28,20 +30,21 @@ const DrawerListItemIcon = styled(ListItemIcon)({
 
 
 const list = [
-  {name : 'Dashboard', 'link': 'link', icon: <ShoppingCartIcon />},
-  {name : 'Orders', 'link': 'link', icon: <PeopleIcon />},
-  {name : 'Customers', 'link': 'link', icon: <LayersIcon />},
-  {name : 'Reports', 'link': 'link', icon: <BarChartIcon />},
+  {name : 'Dashboard', 'path': '/', icon: <ShoppingCartIcon />},
+  {name : 'Orders', 'path': '/form', icon: <PeopleIcon />},
+  {name : 'Customers', 'path': '/table', icon: <LayersIcon />},
+  {name : 'Reports', 'path': 'link', icon: <BarChartIcon />},
 ];
 
 export const mainListItems = (
   <React.Fragment>
     {list.map((item, index) => {
       return <MainListItem key={index} button>
-        
+        <Link to={item.path}>
       <DrawerListItemIcon>
       <Tooltip title={item.name} placement="right-start">{item.icon}</Tooltip>
       </DrawerListItemIcon>
+      </Link>
       
       <ListItemText primary={item.name} />
     </MainListItem>

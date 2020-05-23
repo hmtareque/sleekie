@@ -74,6 +74,16 @@ const useStyles = makeStyles((theme) => ({
   //   left: -6,
   //   zIndex: 1,
   // },
+
+
+ bapro: {
+    width: '200px',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+
+
   buttonProgress: {
     color: green[500],
     position: 'absolute',
@@ -247,7 +257,7 @@ fullWidth
         >
         { isSubmitting ? 'Saving ...'  : 'Save'}
         </Button>
-        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+      {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
       </div>
             
 
@@ -270,7 +280,11 @@ fullWidth
 
    
   <Backdrop className={classes.backdrop} open={open}>
-    <CircularProgress color="inherit" />
+    {/* <CircularProgress color="inherit" /> */}
+    <div className={classes.bapro}>
+      <LinearProgress />
+      {/* <LinearProgress color="secondary" /> */}
+    </div>
   </Backdrop>
     
 
