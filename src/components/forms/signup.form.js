@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
+import { useHistory } from "react-router-dom";
 import { styled } from '@material-ui/core/styles';
 import * as Yup from 'yup';
 
@@ -140,11 +141,7 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-
 }));
-
-
-
 
 
 const SignupSchema = Yup.object().shape({
@@ -160,21 +157,21 @@ const SignupSchema = Yup.object().shape({
 
     position: Yup.string()
     .required('Required'),
+    checked: Yup.boolean()
+    .required('Please check')
 });
 
-const SignupForm = () => {
+const SignupForm = ({ person }) => {
 
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
-  //const [age, setSelect] = React.useState('');
-
   const [open, setOpen] = React.useState(false);
 
+  const history = useHistory();
 
 
-
-
+  console.log('rendered');
 
   return (
 
@@ -186,12 +183,12 @@ const SignupForm = () => {
 
       <Formik
         initialValues={{
-          name: '',
-          email: '',
+          name: person.name,
+          email: person.email,
           age: '',
           position: '',
           checked: false,
-          multiline: 'default value'
+          multiline: 'default value',
         }}
         validationSchema={SignupSchema}
         onSubmit={(values, actions) => {
@@ -207,6 +204,8 @@ const SignupForm = () => {
             setSuccess(true);
             setLoading(false);
             setOpen(false);
+
+            history.push('/table');
 
 
           }, 5000);
@@ -334,6 +333,10 @@ const SignupForm = () => {
 
 
                   <Grid item md={12}>
+                  <FormControl error={errors.checked && touched.checked ? true : false} component="fieldset">
+        
+                  
+                  <FormLabel component="legend">Pick two</FormLabel>
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -345,6 +348,8 @@ const SignupForm = () => {
                       }
                       label="Primary"
                     />
+                  <FormHelperText>{ errors.checked }</FormHelperText>
+                    </FormControl>
                   </Grid>
 
 
@@ -359,6 +364,8 @@ const SignupForm = () => {
           rows={4}
 
           value={values.multiline}
+          onChange={handleChange}
+                          onBlur={handleBlur}
         />
 
 

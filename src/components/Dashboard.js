@@ -403,7 +403,7 @@ export default function Dashboard() {
 
         <Grid item xs={12} md={6}>
           
-            <SignupForm />
+            <SignupForm person={{ name: 'Hasan Tareque', email: 'hmtareque@gmail.com' }}/>
           
         </Grid>
 
