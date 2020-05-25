@@ -46,7 +46,7 @@ export const mainListItems = (
       </DrawerListItemIcon>
       </Link>
       
-      <ListItemText primary={item.name} />
+      <Link to={item.path}><ListItemText primary={item.name} /></Link>
     </MainListItem>
     })}
   </React.Fragment>
