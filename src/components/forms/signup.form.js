@@ -49,6 +49,13 @@ import {
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
+
+import { SnackbarProvider, useSnackbar } from 'notistack';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -168,7 +175,11 @@ const SignupForm = ({ person }) => {
   const [success, setSuccess] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
+  const [showAlert, setShowAlert] = React.useState(true);
+
   const history = useHistory();
+
+  const { enqueueSnackbar } = useSnackbar();
 
 
   console.log('rendered');
@@ -205,7 +216,14 @@ const SignupForm = ({ person }) => {
             setLoading(false);
             setOpen(false);
 
-            history.push('/table');
+            enqueueSnackbar('This is a success message!', {
+            variant: "success",
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'right',
+          }});
+
+            //history.push('/table');
 
 
           }, 5000);
@@ -399,6 +417,9 @@ const SignupForm = ({ person }) => {
 
 
               </CardActions>
+
+              
+
             </Form>
           )}
 
@@ -413,6 +434,27 @@ const SignupForm = ({ person }) => {
           {/* <LinearProgress color="secondary" /> */}
         </div>
       </Backdrop>
+
+      <div className="">
+      <Collapse in={showAlert}>
+        <Alert
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setShowAlert(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+        >
+          Close me!
+        </Alert>
+      </Collapse>
+    </div>
 
 
     </Card>

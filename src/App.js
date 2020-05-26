@@ -2,6 +2,7 @@ import React from 'react';
 import Dashboard from './components/Dashboard';
 import Table from './components/Table';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 function App() {
   return (
