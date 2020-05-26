@@ -38,8 +38,10 @@ import FormikForm from './forms/FormikForm';
 import SignupForm from './forms/signup.form';
 import TestForm from './forms/test.form';
 
-import MaterialTableDemo from './tables/full.table';
+import MaterialTableDemo from '../components/tables/full.table';
 import PrimaryList from './list.primary';
+
+import Nav from './nav';
 
 function Copyright() {
   return (
@@ -61,7 +63,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    //paddingRight: 24, // keep right padding when drawer closed
+    minHeight: '52px'
   },
   toolbarIcon: {
     color: theme.palette.info.dark,
@@ -72,7 +75,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
    // alignItems: 'center',
     //  justifyContent: 'flex-end',
-    padding: '8px',
+    padding: '2px 8px',
+
+    // [theme.breakpoints.down('sm')]: {
+    //   padding: '0px 8px',
+    // },
+
 
   //  backgroundColor: theme.palette.info.main,
    // ...theme.mixins.toolbar,
@@ -89,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
 
   appBar: {
     backgroundColor: theme.palette.info.dark,
+    width: `calc(100% - 56px)`,
     boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -109,7 +118,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    //marginRight: theme.spacing(2),
+    marginLeft: '-4px',
+    // [theme.breakpoints.up('sm')]: {
+    //   padding: '8px',
+    // },
   },
 
   menuButtonHidden: {
@@ -131,9 +144,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   width: theme.spacing(9),
+    // },
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -209,6 +222,12 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+
+
+  hide: {
+    display: 'none'
+  }
+
 }));
 
 export default function Table() {
@@ -306,73 +325,8 @@ export default function Table() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Page title
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={'9+'} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-
-      {renderMobileMenu}
-      {renderMenu}
+      
+      <Nav open={open} />
 
       <Drawer
         variant="permanent"
@@ -383,17 +337,30 @@ export default function Table() {
       >
         <div className={classes.drawerToolbar}>
           
-          <IconButton onClick={handleDrawerClose} className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose} className={clsx(classes.toolbarIcon, !open && classes.hide)}>
             <ChevronLeftIcon />
+          </IconButton>
+
+          <Typography className={clsx(classes.appName, !open && classes.hide)} variant="h6" noWrap>
+            APP NAME
+          </Typography>
+
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+          >
+            <MenuIcon />
           </IconButton>
          
 
-          <Typography className={classes.appName} variant="h6" noWrap>
-            APP NAME
-          </Typography>
+          
         </div>
         <Divider />
-        <PrimaryList/>
+
+        <PrimaryList more={open}/>
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
@@ -402,20 +369,10 @@ export default function Table() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
 
-        
-
-        { <MaterialTableDemo /> }
+       
+         <MaterialTableDemo /> 
           
-           
-           {/* <MUITestForm />
-
-           <FormikForm /> */}
-
-           {/* <TestForm /> */}
-
-           
-          
-          
+   
           <Box pt={4}>
             <Copyright />
           </Box>

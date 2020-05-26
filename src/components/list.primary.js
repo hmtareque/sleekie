@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -27,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
 
   hide: {
       display: 'none'
+  },
+  block: {
+    display: 'block'
   }
 }));
 
@@ -45,7 +49,7 @@ export default function PrimaryList({ more }){
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
-        <ListSubheader component="div" id="nested-list-subheader" className={classes.hide}>
+        <ListSubheader component="div" id="nested-list-subheader" className={more ? classes.block : classes.hide}>
           Nested List Items
         </ListSubheader>
       }

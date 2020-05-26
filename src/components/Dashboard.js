@@ -26,6 +26,16 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+import Button from '@material-ui/core/Button';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
+import Icon from '@material-ui/core/Icon';
+import SaveIcon from '@material-ui/icons/Save';
+
+import ExpandMore from '@material-ui/icons/ExpandMore';
+
+import { blue } from '@material-ui/core/colors';
+
 
 
 import { mainListItems, secondaryListItems } from './listItems';
@@ -224,7 +234,26 @@ const useStyles = makeStyles((theme) => ({
 
   hide: {
     display: 'none'
-  }
+  },
+
+  profileButton: {
+    color: 'white',
+   // border: 'none',
+  //  textDecoration: 'none',
+    textTransform: 'none',
+   // padding: '0px 5px',
+    margin: theme.spacing(1),
+    borderColor: blue[500],
+    '&:hover': {
+    //  color: blue[50],
+    //  backgroundColor: blue[500],
+    //  borderRadius: '10px'
+    }
+  },
+
+  button: {
+    margin: theme.spacing(1),
+  },
 
 
 }));
@@ -356,16 +385,20 @@ export default function Dashboard() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              edge="end"
+            
+             
+
+              <Button
+        variant="outlined"
+        className={classes.profileButton}
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+        startIcon={<AccountCircle />}
+        endIcon={<ExpandMore />}
+      >Hasan Tareque</Button>
+
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
