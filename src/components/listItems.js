@@ -37,19 +37,26 @@ const list = [
 ];
 
 export const mainListItems = (
-  <React.Fragment>
-    {list.map((item, index) => {
-      return <MainListItem key={index} button>
-        <Link to={item.path}>
-      <DrawerListItemIcon>
-      <Tooltip title={item.name} placement="right-start">{item.icon}</Tooltip>
-      </DrawerListItemIcon>
-      </Link>
-      
-      <Link to={item.path}><ListItemText primary={item.name} /></Link>
-    </MainListItem>
-    })}
-  </React.Fragment>
+  <div>
+   <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Current month" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Last quarter" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Year-end sale" />
+    </ListItem>
+  </div>
 );
 
 export const secondaryListItems = (

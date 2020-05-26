@@ -39,6 +39,7 @@ import SignupForm from './forms/signup.form';
 import TestForm from './forms/test.form';
 
 import MaterialTableDemo from '../components/tables/full.table';
+import PrimaryList from './list.primary';
 
 function Copyright() {
   return (
@@ -60,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    //paddingRight: 24, // keep right padding when drawer closed
+    minHeight: '52px'
   },
   toolbarIcon: {
     color: theme.palette.info.dark,
@@ -71,7 +73,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
    // alignItems: 'center',
     //  justifyContent: 'flex-end',
-    padding: '8px',
+    padding: '2px 8px',
+
+    // [theme.breakpoints.down('sm')]: {
+    //   padding: '0px 8px',
+    // },
+
 
   //  backgroundColor: theme.palette.info.main,
    // ...theme.mixins.toolbar,
@@ -88,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
   appBar: {
     backgroundColor: theme.palette.info.dark,
+    width: `calc(100% - 56px)`,
     boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -108,7 +116,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    //marginRight: theme.spacing(2),
+    marginLeft: '-4px',
+    // [theme.breakpoints.up('sm')]: {
+    //   padding: '8px',
+    // },
   },
 
   menuButtonHidden: {
@@ -130,9 +142,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   width: theme.spacing(9),
+    // },
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -208,6 +220,13 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+
+
+  hide: {
+    display: 'none'
+  }
+
+
 }));
 
 export default function Dashboard() {
@@ -307,15 +326,7 @@ export default function Dashboard() {
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
+          
           <Typography className={classes.title} variant="h6" noWrap>
             Page title
           </Typography>
@@ -382,17 +393,30 @@ export default function Dashboard() {
       >
         <div className={classes.drawerToolbar}>
           
-          <IconButton onClick={handleDrawerClose} className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose} className={clsx(classes.toolbarIcon, !open && classes.hide)}>
             <ChevronLeftIcon />
+          </IconButton>
+
+          <Typography className={clsx(classes.appName, !open && classes.hide)} variant="h6" noWrap>
+            APP NAME
+          </Typography>
+
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+          >
+            <MenuIcon />
           </IconButton>
          
 
-          <Typography className={classes.appName} variant="h6" noWrap>
-            APP NAME
-          </Typography>
+          
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+
+        <PrimaryList more={open}/>
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
@@ -401,7 +425,7 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={8}>
           
             <SignupForm person={{ name: 'Hasan Tareque', email: 'hmtareque@gmail.com' }}/>
           

@@ -39,6 +39,7 @@ import SignupForm from './forms/signup.form';
 import TestForm from './forms/test.form';
 
 import MaterialTableDemo from './tables/full.table';
+import PrimaryList from './list.primary';
 
 function Copyright() {
   return (
@@ -392,7 +393,7 @@ export default function Table() {
           </Typography>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <PrimaryList/>
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
