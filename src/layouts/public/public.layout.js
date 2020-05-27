@@ -20,12 +20,9 @@ const PublicLayout = props => {
   const classes = useStyles();
 
   return (
-    <div >
+    <div>
       <CssBaseline />
-      <main>
-          {children}
-          <Footer />
-      </main>
+      {children}
     </div>
   );
 };

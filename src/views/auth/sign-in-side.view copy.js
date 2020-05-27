@@ -28,7 +28,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-   // height: '100vh',
+    height: '100vh',
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -37,10 +37,9 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    paddingLeft: '5px',
   },
   paper: {
-    margin: theme.spacing(4,  2),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -62,12 +61,10 @@ export default function SignInSide() {
   const classes = useStyles();
 
   return (
-    <div style={{maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto', marginTop: '64px'}}>
-      <Paper>
-    <Grid container component="main" maxWidth="sm">
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={6} className={classes.image} />
-      <Grid item xs={12} sm={8} md={6} elevation={6} square>
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -130,7 +127,5 @@ export default function SignInSide() {
         </div>
       </Grid>
     </Grid>
-    </Paper>
-    </div>
   );
 }

@@ -12,6 +12,7 @@ import SignupForm from './views/form.view';
 import RecipeReviewCard from './views/test.view';
 
 import SignIn from './views/auth/sign-in.view';
+import SignInSide from './views/auth/sign-in-side.view';
 import ForgotPassword from './views/auth/reset-password.view';
 
 const Routes = () => {
@@ -66,6 +67,14 @@ const Routes = () => {
         exact
         layout={PublicLayout}
         path="/reset-password"
+      />
+
+      <RouteWithLayout
+        title="Sign In Side"
+        component={SignInSide}
+        exact
+        layout={PublicLayout}
+        path="/sign-in-side"
       />
 
       <Redirect to="/not-found" />

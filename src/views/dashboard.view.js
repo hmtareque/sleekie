@@ -40,10 +40,7 @@ const Dashboard = () => {
   return (
     <div className="">
 
-
-
-
-        <Grid xs={12} md={8}>
+        <Grid item xs={12} md={8}>
 
 
           <h3>Hasan Tareque</h3>
