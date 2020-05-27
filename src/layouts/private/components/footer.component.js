@@ -6,7 +6,7 @@ import { Typography, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-   // padding: theme.spacing(4)
+    paddingTop: theme.spacing(4)
   }
 }));
 
@@ -27,9 +27,9 @@ const Footer = props => {
           href="https://devias.io/"
           target="_blank"
         >
-          Devias IO
+          Hasan Tareque
         </Link>
-        . 2019
+        . 2020
       </Typography>
       <Typography variant="caption">
         Created with love for the environment. By designers and developers who

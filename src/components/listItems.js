@@ -30,33 +30,26 @@ const DrawerListItemIcon = styled(ListItemIcon)({
 
 
 const list = [
-  {name : 'Dashboard', 'path': '/', icon: <ShoppingCartIcon />},
-  {name : 'Orders', 'path': '/form', icon: <PeopleIcon />},
-  {name : 'Customers', 'path': '/table', icon: <LayersIcon />},
-  {name : 'Reports', 'path': 'link', icon: <BarChartIcon />},
+  {name : 'Dashboard', 'path': 'link', icon: <ShoppingCartIcon />},
+  {name : 'Orders', 'path': 'link', icon: <PeopleIcon />},
+  {name : 'Customers', 'path': 'link', icon: <LayersIcon />},
+  {name : 'Reports', '': 'link', icon: <BarChartIcon />},
 ];
 
 export const mainListItems = (
-  <div>
-   <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItem>
-  </div>
+  <React.Fragment>
+    {list.map((item, index) => {
+      return <MainListItem key={index} button>
+        <Link to="/test">
+      <DrawerListItemIcon>
+      <Tooltip title={item.name} placement="right-start">{item.icon}</Tooltip>
+      </DrawerListItemIcon>
+      </Link>
+      
+      <ListItemText primary={item.name} />
+    </MainListItem>
+    })}
+  </React.Fragment>
 );
 
 export const secondaryListItems = (

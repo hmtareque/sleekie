@@ -14,16 +14,31 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 
+import Tooltip from '@material-ui/core/Tooltip';
+
 import { Link } from 'react-router-dom';
+
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import BarChartIcon from '@material-ui/icons/BarChart';
+
+import { blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 240,
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
     paddingLeft: theme.spacing(4),
+  },
+
+  item: {
+    color: theme.palette.primary.main,
+    '&:hover': {
+      color: theme.palette.primary.main,
+    }
   },
 
   hide: {
@@ -38,11 +53,15 @@ export default function PrimaryList({ more }){
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
-  console.log(more);
-
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const list = [
+    {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon color="primary" />},
+    {name : 'Transactions', 'path': '/transactions', icon: <BarChartIcon color="primary" />},
+    {name : 'Customers', 'path': '/customers', icon: <PeopleOutlineIcon color="primary" />},
+  ];
 
   return (
     <List
@@ -55,24 +74,25 @@ export default function PrimaryList({ more }){
       }
       className={classes.root}
     >
-      <ListItem button component={Link} to="/dashboard">
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-        <ListItemText primary="Sent mail" />
-      </ListItem>
-      <ListItem button component={Link} to="/customers">
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Drafts" />
-      </ListItem>
-      <ListItem button component={Link} to="/form">
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Form" />
-      </ListItem>
+
+
+
+{list.map((item, index) => {
+
+return <ListItem button component={Link} to={item.path} key={index} className={classes.item}>
+<ListItemIcon>
+<Tooltip title={item.name} placement="right-start" >{item.icon}</Tooltip>
+</ListItemIcon>
+<ListItemText primary={item.name} color="primary"/>
+</ListItem>
+
+})}
+
+
+      
+
+      
+
       <ListItem button onClick={handleClick}>
         <ListItemIcon>
           <InboxIcon />

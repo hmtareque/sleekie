@@ -42,6 +42,7 @@ const PrivateLayout = props => {
       <CssBaseline />
       <Topbar onSidebarOpen={openSidebar} />
       <Sidebar
+        appName="App Name"
         onOpen={handleSidebarOpen}
         onClose={handleSidebarClose}
         open={openSidebar}
