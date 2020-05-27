@@ -55,17 +55,23 @@ export default function PrimaryList({ more }){
       }
       className={classes.root}
     >
-      <ListItem button component={Link} to="/">
+      <ListItem button component={Link} to="/dashboard">
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
         <ListItemText primary="Sent mail" />
       </ListItem>
-      <ListItem button component={Link} to="/table">
+      <ListItem button component={Link} to="/customers">
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
         <ListItemText primary="Drafts" />
+      </ListItem>
+      <ListItem button component={Link} to="/form">
+        <ListItemIcon>
+          <DraftsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Form" />
       </ListItem>
       <ListItem button onClick={handleClick}>
         <ListItemIcon>

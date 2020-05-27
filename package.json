@@ -12,6 +12,7 @@
     "formik": "^2.1.4",
     "material-table": "^1.57.2",
     "notistack": "^0.9.16",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
