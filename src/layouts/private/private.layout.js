@@ -19,13 +19,18 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   }
 }));
 
 const PrivateLayout = props => {
+  
   const { children } = props;
+  const title = children.props.title;
+
+  console.log(children.props.title);
+  
   const classes = useStyles();
   const [openSidebar, setOpenSidebar] = useState(false);
 
@@ -40,9 +45,9 @@ const PrivateLayout = props => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Topbar onSidebarOpen={openSidebar} />
+      <Topbar title={title} onSidebarOpen={openSidebar} />
       <Sidebar
-        appName="App Name"
+        appName="App"
         onOpen={handleSidebarOpen}
         onClose={handleSidebarClose}
         open={openSidebar}

@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import {fade, makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -31,14 +31,23 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(3),
+    backgroundColor: fade(theme.palette.grey[200], 0.4),
   },
 
   item: {
     color: theme.palette.primary.main,
     '&:hover': {
-      color: theme.palette.primary.main,
+      backgroundColor: fade(theme.palette.info.light, 0.3),
     }
+  },
+
+  iconSpace: {
+    minWidth: '30px',
+  },
+
+  openIconSpace: {
+    minWidth: '42px',
   },
 
   hide: {
@@ -46,12 +55,18 @@ const useStyles = makeStyles((theme) => ({
   },
   block: {
     display: 'block'
+  },
+  active: {
+    fontWeight: 600,
+    backgroundColor: fade(theme.palette.info.light, 0.3),
   }
 }));
 
 export default function PrimaryList({ more }){
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+
+  const currentLocation = window.location.pathname; 
 
   const handleClick = () => {
     setOpen(!open);
@@ -61,6 +76,8 @@ export default function PrimaryList({ more }){
     {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon color="primary" />},
     {name : 'Transactions', 'path': '/transactions', icon: <BarChartIcon color="primary" />},
     {name : 'Customers', 'path': '/customers', icon: <PeopleOutlineIcon color="primary" />},
+    {name : 'Cards', 'path': '/card', icon: <PeopleOutlineIcon color="primary" />},
+    {name : 'Sign Up', 'path': '/form', icon: <PeopleOutlineIcon color="primary" />},
   ];
 
   return (
@@ -69,7 +86,7 @@ export default function PrimaryList({ more }){
       aria-labelledby="nested-list-subheader"
       subheader={
         <ListSubheader component="div" id="nested-list-subheader" className={more ? classes.block : classes.hide}>
-          Nested List Items
+          Nested List Items {currentLocation}
         </ListSubheader>
       }
       className={classes.root}
@@ -79,8 +96,8 @@ export default function PrimaryList({ more }){
 
 {list.map((item, index) => {
 
-return <ListItem button component={Link} to={item.path} key={index} className={classes.item}>
-<ListItemIcon>
+return <ListItem button component={Link} to={item.path} key={index} className={clsx(classes.item, (item.path === currentLocation) && classes.active)} size="small">
+<ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
 <Tooltip title={item.name} placement="right-start" >{item.icon}</Tooltip>
 </ListItemIcon>
 <ListItemText primary={item.name} color="primary"/>
@@ -98,7 +115,7 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
           <InboxIcon />
         </ListItemIcon>
         <ListItemText primary="Inbox" />
-        {open && more ? <ExpandLess /> : <ExpandMore />}
+        {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open && more} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>

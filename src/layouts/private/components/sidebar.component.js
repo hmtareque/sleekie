@@ -1,12 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { blue } from '@material-ui/core/colors';
 
 import PrimaryList from '../../../components/list.primary';
 
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appName: {
-    color: theme.palette.info.dark,
+    color: 'white',
     padding: '8px 5px',
     width: '200px',
     fontWeight: 'bold',
@@ -29,15 +30,18 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '52px'
   },
   toolbarIcon: {
-    color: theme.palette.primary.main,
+    color: 'white',
+    marginLeft: '-4px',
   },
 
   drawerToolbar: {
     display: 'flex',
     padding: '2px 8px',
+    backgroundColor: fade(theme.palette.info.dark, 0.8),
   },
 
   menuButton: {
+    color: 'white',
     marginLeft: '-4px',
   },
 
@@ -49,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
+    borderColor: theme.palette.info.main,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,

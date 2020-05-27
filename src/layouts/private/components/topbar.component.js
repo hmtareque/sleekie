@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarIcon: {
     color: theme.palette.info.dark,
-
+    marginLeft: '-4px',
   },
 
   appBar: {
@@ -138,11 +138,9 @@ const useStyles = makeStyles((theme) => ({
     //  borderRadius: '10px'
     }
   },
-
-
 }));
 
-const Topbar = ({ onSidebarOpen }) => {
+const Topbar = ({ title, onSidebarOpen }) => {
   const classes = useStyles();
   
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -233,7 +231,7 @@ const Topbar = ({ onSidebarOpen }) => {
         <Toolbar className={classes.toolbar}>
           
           <Typography className={classes.title} variant="h6" noWrap>
-            Page title
+            { title }
           </Typography>
 
           <div className={classes.search}>
