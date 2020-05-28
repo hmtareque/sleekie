@@ -21,8 +21,14 @@ import { Link } from 'react-router-dom';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import PeopleIcon from '@material-ui/icons/People';
+
+import TableChartIcon from '@material-ui/icons/TableChart';
+
+import Badge from '@material-ui/core/Badge';
 
 import { blue } from '@material-ui/core/colors';
+import RoundBadge from './RoundBadge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,10 +39,13 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(3),
     backgroundColor: fade(theme.palette.grey[200], 0.4),
+    paddingTop: '4px',
+    paddingBottom: '4px',
   },
 
   item: {
-    color: theme.palette.primary.main,
+    paddingTop: '4px',
+    paddingBottom: '4px',
     '&:hover': {
       backgroundColor: fade(theme.palette.info.light, 0.3),
     }
@@ -58,8 +67,8 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {
     fontWeight: 600,
-    backgroundColor: fade(theme.palette.info.light, 0.3),
-  }
+    backgroundColor: fade(theme.palette.info.light, 0.1),
+  },
 }));
 
 export default function PrimaryList({ more }){
@@ -73,22 +82,30 @@ export default function PrimaryList({ more }){
   };
 
   const list = [
-    {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon color="primary" />},
-    {name : 'Transactions', 'path': '/transactions', icon: <BarChartIcon color="primary" />},
-    {name : 'Customers', 'path': '/customers', icon: <PeopleOutlineIcon color="primary" />},
-    {name : 'Cards', 'path': '/card', icon: <PeopleOutlineIcon color="primary" />},
-    {name : 'Sign Up', 'path': '/form', icon: <PeopleOutlineIcon color="primary" />},
+    {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon />},
+    {name : 'Transactions', 'path': '/transactions', icon: <BarChartIcon />},
+    {name : 'Customers', 'path': '/customers', icon: <PeopleIcon />},
+    {name : 'Cards', 'path': '/card', icon: <PeopleOutlineIcon />},
+    {name : 'Sign Up', 'path': '/form', icon: <PeopleOutlineIcon />},
+  ];
+
+  const tables = [
+      {name : 'Simple', 'path': '/tables/simple', icon: <DashboardIcon />},
+      {name : 'Fix Head', 'path': '/tables/fix-head', icon: <BarChartIcon />},
+      {name : 'Selectable', 'path': '/selectable', icon: <PeopleOutlineIcon />},
+      {name : 'Dense', 'path': '/dense', icon: <PeopleOutlineIcon />},
+      {name : 'Material', 'path': '/material', icon: <PeopleOutlineIcon />},
   ];
 
   return (
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader" className={more ? classes.block : classes.hide}>
-          Nested List Items {currentLocation}
-        </ListSubheader>
-      }
+      // subheader={
+      //   <ListSubheader component="div" id="nested-list-subheader" className={more ? classes.block : classes.hide}>
+      //     Nested List Items {currentLocation}
+      //   </ListSubheader>
+      // }
       className={classes.root}
     >
 
@@ -96,11 +113,12 @@ export default function PrimaryList({ more }){
 
 {list.map((item, index) => {
 
-return <ListItem button component={Link} to={item.path} key={index} className={clsx(classes.item, (item.path === currentLocation) && classes.active)} size="small">
+return <ListItem button component={Link} to={item.path} key={index} className={clsx(classes.item, (item.path === currentLocation) && classes.active)}>
 <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
 <Tooltip title={item.name} placement="right-start" >{item.icon}</Tooltip>
 </ListItemIcon>
-<ListItemText primary={item.name} color="primary"/>
+<ListItemText primary={item.name}/>
+<RoundBadge text={'5'} />
 </ListItem>
 
 })}
@@ -110,21 +128,37 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
 
       
 
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <InboxIcon />
+      <ListItem button onClick={handleClick} className={clsx(classes.item && (more ? '' : classes.hide))}>
+        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+          <TableChartIcon/>
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary="Tables" />
+        
+
+        
+
+
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+
+
       <Collapse in={open && more} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItem>
+
+        {tables.map((item, index) => {
+
+return <ListItem button component={Link} to={item.path} className={clsx(classes.item, classes.nested)}>
+        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+          {item.icon}
+        </ListItemIcon>
+        <ListItemText primary={item.name} />
+        </ListItem>
+
+})}
+
+          
+
+
         </List>
       </Collapse>
     </List>

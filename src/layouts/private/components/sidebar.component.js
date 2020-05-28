@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { blue } from '@material-ui/core/colors';
 
+import SlimScroller from '../../../components/SlimScroller';
 import PrimaryList from '../../../components/list.primary';
 
 const drawerWidth = 240;
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    height: '100%',
   },
 
   drawerPaperClose: {
@@ -68,6 +70,33 @@ const useStyles = makeStyles((theme) => ({
     }),
     width: theme.spacing(7),
   },
+
+
+  listWrapper: {
+  //  backgroundColor: 'red',
+    height: `calc(100vh - 52px)`,
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+    '*': {
+      scrollbarWidth: 'then',
+      scrollbarColor: 'blue orange',
+    },
+    '&::-webkit-scrollbar': {
+      width: '3px'
+    },
+    '&::-webkit-scrollbar-track': {
+    //  boxShadow: 'inset 0 0 5px grey',
+      borderRadius: '10px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: fade(theme.palette.info.dark, 0.3),
+      borderRadius: '2px',
+      border: '3px solid orange',
+    },
+    
+
+ 
+  }
 
 }));
 
@@ -83,6 +112,7 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
       }}
       open={open}
     >
+      
       <div className={classes.drawerToolbar}>
         <IconButton onClick={onClose} className={clsx(classes.toolbarIcon, !open && classes.hide)}>
           <ChevronLeftIcon />
@@ -102,10 +132,11 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
           <MenuIcon />
         </IconButton>
       </div>
-      <Divider />
+      <SlimScroller autoHide autoHideTimeout={500} autoHideDuration={200}>
       <PrimaryList more={open} />
       <Divider />
       <PrimaryList more={open} />
+      </SlimScroller>
     </Drawer>
   );
 };
