@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(3),
+    paddingLeft: theme.spacing(6),
     backgroundColor: fade(theme.palette.grey[200], 0.4),
     paddingTop: '4px',
     paddingBottom: '4px',
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   iconSpace: {
-    minWidth: '30px',
+    minWidth: '32px',
   },
 
   openIconSpace: {
@@ -92,9 +92,9 @@ export default function PrimaryList({ more }){
   const tables = [
       {name : 'Simple', 'path': '/tables/simple', icon: <DashboardIcon />},
       {name : 'Fix Head', 'path': '/tables/fix-head', icon: <BarChartIcon />},
-      {name : 'Selectable', 'path': '/selectable', icon: <PeopleOutlineIcon />},
-      {name : 'Dense', 'path': '/dense', icon: <PeopleOutlineIcon />},
-      {name : 'Material', 'path': '/material', icon: <PeopleOutlineIcon />},
+      {name : 'Enhanced', 'path': '/tables/enhanced', icon: <PeopleOutlineIcon />},
+      {name : 'Dense', 'path': '/tables/dense', icon: <PeopleOutlineIcon />},
+      {name : 'Material', 'path': '/tables/material', icon: <PeopleOutlineIcon />},
   ];
 
   return (
@@ -147,10 +147,10 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
 
         {tables.map((item, index) => {
 
-return <ListItem button component={Link} to={item.path} className={clsx(classes.item, classes.nested)}>
-        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
+        {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
           {item.icon}
-        </ListItemIcon>
+        </ListItemIcon> */}
         <ListItemText primary={item.name} />
         </ListItem>
 
