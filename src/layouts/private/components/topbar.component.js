@@ -22,6 +22,15 @@ import Button from '@material-ui/core/Button';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { blue } from '@material-ui/core/colors';
 
+import { withStyles } from '@material-ui/core/styles';
+
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    color: theme.palette.white,
+    backgroundColor: theme.palette.pink,
+  },
+}))(Badge);
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -36,9 +45,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
-    backgroundColor: 'black',
+    backgroundColor: theme.palette.dark,
     width: `calc(100% - 64px)`,
-   // boxShadow: 'none',
+    color: theme.palette.mustard,
+    boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -125,19 +135,26 @@ const useStyles = makeStyles((theme) => ({
   },
 
   profileButton: {
-    color: 'white',
+    color: theme.palette.mustard,
    // border: 'none',
   //  textDecoration: 'none',
     textTransform: 'none',
    // padding: '0px 5px',
     margin: theme.spacing(1),
-    borderColor: blue[500],
+    marginLeft: theme.spacing(2),
+    borderColor: theme.palette.mustard,
     '&:hover': {
-    //  color: blue[50],
-    //  backgroundColor: blue[500],
-    //  borderRadius: '10px'
+      color: theme.palette.pink,
+      borderColor: theme.palette.pink,
     }
   },
+
+  badge: {
+    'span': {
+      backgroundColor: theme.palette.pink,
+    }
+    
+  }
 }));
 
 const Topbar = ({ title, onSidebarOpen }) => {
@@ -251,14 +268,14 @@ const Topbar = ({ title, onSidebarOpen }) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+            <StyledBadge badgeContent={4}>
                 <MailIcon />
-              </Badge>
+                </StyledBadge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={'9+'} color="secondary">
+              <StyledBadge badgeContent={'9+'}>
                 <NotificationsIcon />
-              </Badge>
+              </StyledBadge>
             </IconButton>
 
 

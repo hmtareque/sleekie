@@ -3,9 +3,16 @@ import { colors } from '@material-ui/core';
 const white = '#FFFFFF';
 const black = '#000000';
 
+const pink = '#ef6b7b';
+const mustard = '#e2a03c';
+const dark = '#292627';
+
 export default {
   black,
   white,
+  pink,
+  mustard,
+  dark,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],

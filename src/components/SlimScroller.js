@@ -5,7 +5,7 @@ import { blue, grey } from '@material-ui/core/colors';
 const renderThumb = ({ style, ...props }) => {
   const thumbStyle = {
     borderRadius: 8,
-    backgroundColor: grey[100],
+   // backgroundColor: 
   };
   return <div style={{ ...style, ...thumbStyle }} {...props} />;
 };

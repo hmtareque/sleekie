@@ -45,12 +45,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxWidth: 240,
   //  backgroundColor: blueGrey[900],
+  //backgroundColor: fade(theme.palette.mustard, 0.8),
+  //background: 'linear-gradient(45deg, #ffffff 30%, #000000 90%)',
   },
   nested: {
     paddingLeft: theme.spacing(6),
    // backgroundColor: fade(theme.palette.grey[200], 0.4),
-    paddingTop: '4px',
-    paddingBottom: '4px',
+    //paddingTop: '4px',
+    //paddingBottom: '4px',
   },
 
   item: {
@@ -60,14 +62,20 @@ const useStyles = makeStyles((theme) => ({
   // fontWeight: '500',
 
   fontWeight: 500, 
-  fontFamily: 'Heebo', 
+  fontFamily: ["Heebo", "sans-serif"].join(','), 
   fontSize: '1rem', 
-  color: theme.palette.info.dark,
-  
+  color: theme.palette.dark,
    paddingLeft:theme.spacing(2.5),
     '&:hover': {
      // fontWeight: 600,
-     // backgroundColor: fade(blue[50], 0.4),
+      //backgroundColor: fade(theme.palette.mustard, 0.4),
+      color: theme.palette.black,
+
+      
+    },
+
+    '&:after': {
+      transform: 'shewY(45deg)'
     }
   },
 
@@ -92,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   active: {
    // fontWeight: 600,
    // color: blue[800],
-   backgroundColor: fade(blue[50], 0.4),
+   backgroundColor: fade(theme.palette.dark, 0.1),
 
   },
 }));
@@ -108,7 +116,7 @@ export default function PrimaryList({ more }){
   };
 
   const list = [
-    {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon className={classes.icon} />},
+    {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon />},
     {name : 'Charts', 'path': '/charts', icon: <BarChartIcon />},
     {name : 'Pages', 'path': '/customers', icon: <PeopleIcon />},
     {name : 'Cards', 'path': '/card', icon: <PeopleOutlineIcon />, badge: <RoundBadge info={'5'}/>},
@@ -172,7 +180,7 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
         <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
           <TableChartIcon />
         </ListItemIcon>
-        <ListItemText primary="Tables" />
+        <ListItemText primary="Tables" disableTypography={true}/>
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open && more} timeout="auto" unmountOnExit>
@@ -182,7 +190,7 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
                   {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
                     {item.icon}
                   </ListItemIcon> */}
-                  <ListItemText primary={item.name} />
+                  <ListItemText primary={item.name} disableTypography={true}/>
                   </ListItem>
           })}
         </List>
@@ -194,7 +202,7 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
         <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
           <PostAddIcon/>
         </ListItemIcon>
-        <ListItemText primary="Forms" />
+        <ListItemText primary="Forms" disableTypography={true}/>
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open && more} timeout="auto" unmountOnExit>
@@ -212,11 +220,11 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
 
 
       {/* map links */}
-<ListItem button onClick={handleClick} className={clsx(classes.item && (more ? '' : classes.hide))}>
+<ListItem button onClick={handleClick} className={clsx(classes.item, (more ? '' : classes.hide))}>
         <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
           <PostAddIcon/>
         </ListItemIcon>
-        <ListItemText primary="Maps" />
+        <ListItemText primary="Maps" disableTypography={true}/>
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open && more} timeout="auto" unmountOnExit>
@@ -226,7 +234,7 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
                   {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
                     {item.icon}
                   </ListItemIcon> */}
-                  <ListItemText primary={item.name} />
+                  <ListItemText primary={item.name} disableTypography={true}/>
                   </ListItem>
           })}
         </List>
@@ -237,16 +245,16 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
         <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
           <EventIcon/>
         </ListItemIcon>
-        <ListItemText primary="Calendar" />
+        <ListItemText primary="Calendar" disableTypography={true}/>
       </ListItem>
 
 
          {/* auth links */}
-<ListItem button onClick={handleClick} className={clsx(classes.item && (more ? '' : classes.hide))}>
+<ListItem button onClick={handleClick} className={clsx(classes.item, (more ? '' : classes.hide))}>
         <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
           <SupervisorAccountIcon />
         </ListItemIcon>
-        <ListItemText primary="Auth" />
+        <ListItemText primary="Auth" disableTypography={true}/>
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open && more} timeout="auto" unmountOnExit>

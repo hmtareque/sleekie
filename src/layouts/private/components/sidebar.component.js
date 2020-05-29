@@ -32,20 +32,20 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '64px'
   },
   toolbarIcon: {
-   // color: 'white',
-  //  marginLeft: '-4px',
+    // color: 'white',
+    //  marginLeft: '-4px',
   },
 
   drawerToolbar: {
     display: 'flex',
     padding: '8px',
-    backgroundColor: blueGrey[700],
-  //  boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+    backgroundColor: theme.palette.black,
+    //  boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
   },
 
   menuButton: {
-    color: 'blue',
-   marginLeft: 0,
+    color: theme.palette.dark,
+    marginLeft: 0,
   },
 
   hide: {
@@ -56,13 +56,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
-    borderColor: theme.palette.info.main,
+    borderColor: theme.palette.mustard,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
     height: '100%',
-   // backgroundColor: blueGrey.A900,
+     backgroundColor: theme.palette.mustard,
 
   },
 
@@ -89,7 +89,7 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
       }}
       open={open}
     >
-      
+
       <div className={classes.drawerToolbar}>
         <IconButton onClick={onClose} className={clsx(classes.toolbarIcon, !open && classes.hide)}>
           <ChevronLeftIcon />
@@ -110,12 +110,12 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
         </IconButton>
       </div>
 
-      <SlimScroller style={{height: '600px', backgroundColor: 'white'}} autoHide autoHideTimeout={500} autoHideDuration={200}>
-      <PrimaryList more={open} />
+      <SlimScroller style={{height: 640}}  autoHide autoHideTimeout={500} autoHideDuration={200}>
+        <PrimaryList more={open} />
       </SlimScroller>
 
-      <Divider />
-      
+    
+
     </Drawer>
   );
 };
