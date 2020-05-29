@@ -22,6 +22,8 @@ import SignIn from './views/auth/sign-in.view';
 import SignInSide from './views/auth/sign-in-side.view';
 import ForgotPassword from './views/auth/reset-password.view';
 
+import NotFound from './views/errors/404';
+
 const Routes = () => {
   return (
     <Switch>
@@ -92,7 +94,17 @@ const Routes = () => {
         path="/sign-in-side"
       />
 
+<RouteWithLayout
+        title="Sign In Side"
+        component={NotFound}
+        exact
+        layout={PrivateLayout}
+        path="/not-found"
+      />
+
       <Redirect to="/not-found" />
+
+      
     </Switch>
   );
 };

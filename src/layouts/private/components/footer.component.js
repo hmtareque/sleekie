@@ -6,7 +6,7 @@ import { Typography, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: theme.spacing(4)
+    padding: theme.spacing(4, 3),
   }
 }));
 
@@ -24,7 +24,7 @@ const Footer = props => {
         &copy;{' '}
         <Link
           component="a"
-          href="https://devias.io/"
+          href="https://hmtareque.com"
           target="_blank"
         >
           Hasan Tareque

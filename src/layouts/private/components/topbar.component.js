@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
   toolbar: {
     //paddingRight: 24, // keep right padding when drawer closed
-    minHeight: '52px'
+    minHeight: '64px'
   },
   toolbarIcon: {
     color: theme.palette.info.dark,
@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
-    backgroundColor: theme.palette.info.dark,
-    width: `calc(100% - 56px)`,
-    boxShadow: 'none',
+    backgroundColor: 'black',
+    width: `calc(100% - 64px)`,
+   // boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,

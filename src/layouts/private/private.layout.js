@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { fade } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -10,15 +12,17 @@ import Footer from './components/footer.component';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: 'flex', 
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+    backgroundColor: fade(blue[50], 0.2),
   },
   container: {
+    minHeight: '560px',
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   }
@@ -56,8 +60,8 @@ const PrivateLayout = props => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           {children}
-          <Footer />
         </Container>
+        <Footer />
       </main>
     </div>
   );

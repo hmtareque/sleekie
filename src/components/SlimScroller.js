@@ -1,12 +1,11 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { fade } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
 
 const renderThumb = ({ style, ...props }) => {
   const thumbStyle = {
-    borderRadius: 6,
-    backgroundColor: fade(blue[500], 0.8),
+    borderRadius: 8,
+    backgroundColor: grey[100],
   };
   return <div style={{ ...style, ...thumbStyle }} {...props} />;
 };

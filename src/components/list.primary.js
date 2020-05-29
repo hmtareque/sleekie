@@ -14,6 +14,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 
+import TocIcon from '@material-ui/icons/Toc';
+
 import Tooltip from '@material-ui/core/Tooltip';
 
 import { Link } from 'react-router-dom';
@@ -22,33 +24,55 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import PeopleIcon from '@material-ui/icons/People';
-
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import TableChartIcon from '@material-ui/icons/TableChart';
+import EventIcon from '@material-ui/icons/Event';
+import PagesIcon from '@material-ui/icons/Pages';
+import LockIcon from '@material-ui/icons/Lock';
+import WebIcon from '@material-ui/icons/Web';
+import WidgetsIcon from '@material-ui/icons/Widgets';
+import MapIcon from '@material-ui/icons/Map';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 import Badge from '@material-ui/core/Badge';
 
-import { blue } from '@material-ui/core/colors';
+import { blueGrey, blue } from '@material-ui/core/colors';
 import RoundBadge from './RoundBadge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 240,
-    backgroundColor: theme.palette.background.paper,
+  //  backgroundColor: blueGrey[900],
   },
   nested: {
     paddingLeft: theme.spacing(6),
-    backgroundColor: fade(theme.palette.grey[200], 0.4),
+   // backgroundColor: fade(theme.palette.grey[200], 0.4),
     paddingTop: '4px',
     paddingBottom: '4px',
   },
 
   item: {
-    paddingTop: '4px',
-    paddingBottom: '4px',
+   // paddingTop: '4px',
+   // paddingBottom: '4px',
+   // fontSize: '16px',
+  // fontWeight: '500',
+
+  fontWeight: 500, 
+  fontFamily: 'Heebo', 
+  fontSize: '1rem', 
+  color: theme.palette.info.dark,
+  
+   paddingLeft:theme.spacing(2.5),
     '&:hover': {
-      backgroundColor: fade(theme.palette.info.light, 0.3),
+     // fontWeight: 600,
+     // backgroundColor: fade(blue[50], 0.4),
     }
+  },
+
+  icon: {
+    color: theme.palette.info.dark,
   },
 
   iconSpace: {
@@ -56,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   openIconSpace: {
-    minWidth: '42px',
+    minWidth: '48px',
   },
 
   hide: {
@@ -66,8 +90,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'block'
   },
   active: {
-    fontWeight: 600,
-    backgroundColor: fade(theme.palette.info.light, 0.1),
+   // fontWeight: 600,
+   // color: blue[800],
+   backgroundColor: fade(blue[50], 0.4),
+
   },
 }));
 
@@ -82,11 +108,11 @@ export default function PrimaryList({ more }){
   };
 
   const list = [
-    {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon />},
-    {name : 'Transactions', 'path': '/transactions', icon: <BarChartIcon />},
-    {name : 'Customers', 'path': '/customers', icon: <PeopleIcon />},
-    {name : 'Cards', 'path': '/card', icon: <PeopleOutlineIcon />},
-    {name : 'Sign Up', 'path': '/form', icon: <PeopleOutlineIcon />},
+    {name : 'Dashboard', 'path': '/dashboard', icon: <DashboardIcon className={classes.icon} />},
+    {name : 'Charts', 'path': '/charts', icon: <BarChartIcon />},
+    {name : 'Pages', 'path': '/customers', icon: <PeopleIcon />},
+    {name : 'Cards', 'path': '/card', icon: <PeopleOutlineIcon />, badge: <RoundBadge info={'5'}/>},
+    {name : 'Sign Up', 'path': '/form', icon: <PeopleOutlineIcon /> },
   ];
 
   const tables = [
@@ -97,12 +123,30 @@ export default function PrimaryList({ more }){
       {name : 'Material', 'path': '/tables/material', icon: <PeopleOutlineIcon />},
   ];
 
+  const forms = [
+    {name : 'Simple', 'path': '/tables/simple', icon: <DashboardIcon />},
+    {name : 'Fix Head', 'path': '/tables/fix-head', icon: <BarChartIcon />},
+    {name : 'Enhanced', 'path': '/tables/enhanced', icon: <PeopleOutlineIcon />},
+    {name : 'Dense', 'path': '/tables/dense', icon: <PeopleOutlineIcon />},
+    {name : 'Material', 'path': '/tables/material', icon: <PeopleOutlineIcon />},
+];
+
+const maps = [
+  {name : 'Google', 'path': '/tables/simple', icon: <DashboardIcon />},
+  {name : 'Vector', 'path': '/tables/fix-head', icon: <BarChartIcon />},
+];
+
+const auth = [
+  {name : 'Sign In', 'path': '/login'},
+  {name : 'Sign In by Side', 'path': '/tables/fix-head'},
+];
+
   return (
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
       // subheader={
-      //   <ListSubheader component="div" id="nested-list-subheader" className={more ? classes.block : classes.hide}>
+      //   <ListSubheader component="span" id="nested-list-subheader" className={more ? classes.block : classes.hide}>
       //     Nested List Items {currentLocation}
       //   </ListSubheader>
       // }
@@ -117,48 +161,104 @@ return <ListItem button component={Link} to={item.path} key={index} className={c
 <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
 <Tooltip title={item.name} placement="right-start" >{item.icon}</Tooltip>
 </ListItemIcon>
-<ListItemText primary={item.name}/>
-<RoundBadge text={'5'} />
+<ListItemText primary={item.name} disableTypography={true} />
+{item.badge}
 </ListItem>
 
 })}
 
-
-      
-
-      
-
-      <ListItem button onClick={handleClick} className={clsx(classes.item && (more ? '' : classes.hide))}>
+{/* tables link */}
+      <ListItem button onClick={handleClick} className={classes.item}>
         <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-          <TableChartIcon/>
+          <TableChartIcon />
         </ListItemIcon>
         <ListItemText primary="Tables" />
-        
-
-        
-
-
         {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open && more} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+        {tables.map((item, index) => {
+          return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
+                  {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                    {item.icon}
+                  </ListItemIcon> */}
+                  <ListItemText primary={item.name} />
+                  </ListItem>
+          })}
+        </List>
+      </Collapse>
+
+
+{/* form links */}
+<ListItem button onClick={handleClick} className={clsx(classes.item, (more ? '' : classes.hide))}>
+        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+          <PostAddIcon/>
+        </ListItemIcon>
+        <ListItemText primary="Forms" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open && more} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+        {forms.map((item, index) => {
+          return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
+                  {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                    {item.icon}
+                  </ListItemIcon> */}
+                  <span style={{fontFamily: 'Heebo', fontWeight: 500}}>{item.name}</span>
+                  </ListItem>
+          })}
+        </List>
+      </Collapse>
+
+
+      {/* map links */}
+<ListItem button onClick={handleClick} className={clsx(classes.item && (more ? '' : classes.hide))}>
+        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+          <PostAddIcon/>
+        </ListItemIcon>
+        <ListItemText primary="Maps" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open && more} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+        {maps.map((item, index) => {
+          return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
+                  {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                    {item.icon}
+                  </ListItemIcon> */}
+                  <ListItemText primary={item.name} />
+                  </ListItem>
+          })}
+        </List>
+      </Collapse>
+
+
+      <ListItem button component={Link} to="/calendar" className={classes.item}>
+        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+          <EventIcon/>
+        </ListItemIcon>
+        <ListItemText primary="Calendar" />
       </ListItem>
 
 
+         {/* auth links */}
+<ListItem button onClick={handleClick} className={clsx(classes.item && (more ? '' : classes.hide))}>
+        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+          <SupervisorAccountIcon />
+        </ListItemIcon>
+        <ListItemText primary="Auth" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
       <Collapse in={open && more} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-
-        {tables.map((item, index) => {
-
-return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
-        {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-          {item.icon}
-        </ListItemIcon> */}
-        <ListItemText primary={item.name} />
-        </ListItem>
-
-})}
-
-          
-
-
+        {auth.map((item, index) => {
+          return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
+                  {/* <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                    {item.icon}
+                  </ListItemIcon> */}
+                  <ListItemText primary={item.name} />
+                  </ListItem>
+          })}
         </List>
       </Collapse>
     </List>

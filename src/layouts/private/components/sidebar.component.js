@@ -1,13 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import { fade } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { blue } from '@material-ui/core/colors';
+import { grey, blue, blueGrey } from '@material-ui/core/colors';
 
 import SlimScroller from '../../../components/SlimScroller';
 import PrimaryList from '../../../components/list.primary';
@@ -28,22 +29,23 @@ const useStyles = makeStyles((theme) => ({
   },
 
   toolbar: {
-    minHeight: '52px'
+    minHeight: '64px'
   },
   toolbarIcon: {
-    color: 'white',
-    marginLeft: '-4px',
+   // color: 'white',
+  //  marginLeft: '-4px',
   },
 
   drawerToolbar: {
     display: 'flex',
-    padding: '2px 8px',
-    backgroundColor: fade(theme.palette.info.dark, 0.8),
+    padding: '8px',
+    backgroundColor: blueGrey[700],
+  //  boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
   },
 
   menuButton: {
-    color: 'white',
-    marginLeft: '-4px',
+    color: 'blue',
+   marginLeft: 0,
   },
 
   hide: {
@@ -60,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     height: '100%',
+   // backgroundColor: blueGrey.A900,
+
   },
 
   drawerPaperClose: {
@@ -68,35 +72,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing(7),
+    width: theme.spacing(8),
   },
-
-
-  listWrapper: {
-  //  backgroundColor: 'red',
-    height: `calc(100vh - 52px)`,
-    overflowX: 'hidden',
-    overflowY: 'scroll',
-    '*': {
-      scrollbarWidth: 'then',
-      scrollbarColor: 'blue orange',
-    },
-    '&::-webkit-scrollbar': {
-      width: '3px'
-    },
-    '&::-webkit-scrollbar-track': {
-    //  boxShadow: 'inset 0 0 5px grey',
-      borderRadius: '10px',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      background: fade(theme.palette.info.dark, 0.3),
-      borderRadius: '2px',
-      border: '3px solid orange',
-    },
-    
-
- 
-  }
 
 }));
 
@@ -132,11 +109,13 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
           <MenuIcon />
         </IconButton>
       </div>
-      <SlimScroller autoHide autoHideTimeout={500} autoHideDuration={200}>
-      <PrimaryList more={open} />
-      <Divider />
+
+      <SlimScroller style={{height: '600px', backgroundColor: 'white'}} autoHide autoHideTimeout={500} autoHideDuration={200}>
       <PrimaryList more={open} />
       </SlimScroller>
+
+      <Divider />
+      
     </Drawer>
   );
 };
