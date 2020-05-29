@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
 
   appBar: {
-    backgroundColor: theme.palette.info.dark,
+  //  backgroundColor: theme.palette.info.dark,
     boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {

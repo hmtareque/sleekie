@@ -27,7 +27,7 @@ import { withStyles } from '@material-ui/core/styles';
 const StyledBadge = withStyles((theme) => ({
   badge: {
     color: theme.palette.white,
-    backgroundColor: theme.palette.pink,
+   // backgroundColor: theme.palette.pink,
   },
 }))(Badge);
 
@@ -45,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
-    backgroundColor: theme.palette.dark,
+  //  backgroundColor: theme.palette.dark,
     width: `calc(100% - 64px)`,
-    color: theme.palette.mustard,
+  //  color: theme.palette.mustard,
     boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   profileButton: {
-    color: theme.palette.mustard,
+ //   color: theme.palette.mustard,
    // border: 'none',
   //  textDecoration: 'none',
     textTransform: 'none',
@@ -144,14 +144,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     borderColor: theme.palette.mustard,
     '&:hover': {
-      color: theme.palette.pink,
-      borderColor: theme.palette.pink,
+     // color: theme.palette.pink,
+     // borderColor: theme.palette.pink,
     }
   },
 
   badge: {
     'span': {
-      backgroundColor: theme.palette.pink,
+    //  backgroundColor: theme.palette.pink,
     }
     
   }

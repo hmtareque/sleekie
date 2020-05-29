@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-    backgroundColor: fade(theme.palette.pink, 0.075),
+   // backgroundColor: fade(theme.palette.pink, 0.075),
   },
   container: {
     minHeight: '560px',

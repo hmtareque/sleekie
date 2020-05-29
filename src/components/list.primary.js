@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   fontWeight: 500, 
   fontFamily: ["Heebo", "sans-serif"].join(','), 
   fontSize: '1rem', 
-  color: theme.palette.dark,
+ // color: theme.palette.dark,
    paddingLeft:theme.spacing(2.5),
     '&:hover': {
      // fontWeight: 600,
@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   active: {
    // fontWeight: 600,
    // color: blue[800],
-   backgroundColor: fade(theme.palette.dark, 0.1),
+  // backgroundColor: fade(theme.palette.dark, 0.1),
 
   },
 }));

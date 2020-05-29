@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Router } from 'react-router-dom';
 import Routes from './routes';
 import { ThemeProvider } from '@material-ui/styles';
-import theme from './theme/index';
+import theme from './themes/index';
 import { createBrowserHistory } from 'history';
 import { SnackbarProvider } from 'notistack';
 

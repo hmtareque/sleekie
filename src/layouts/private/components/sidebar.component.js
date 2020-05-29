@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   menuButton: {
-    color: theme.palette.dark,
+  //  color: theme.palette.dark,
     marginLeft: 0,
   },
 
@@ -56,13 +56,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
-    borderColor: theme.palette.mustard,
+ //   borderColor: theme.palette.mustard,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
     height: '100%',
-     backgroundColor: theme.palette.mustard,
+  //   backgroundColor: theme.palette.mustard,
 
   },
 
