@@ -184,22 +184,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimaryList({ more }) {
     const classes = useStyles();
-    const [listId, setListId] = React.useState(0);
-    const [open, setOpen] = React.useState(false);
+
+
+
+
+    const [listId, setListId] = React.useState([]);
+    const [open, setOpen] = React.useState(true);
 
     const currentLocation = window.location.pathname;
 
     const history = useHistory();
 
     const handleClick = ( list_id ) => {
-        
-        setOpen(!open);
-        setListId(list_id);
-        
 
-        if(listId !== list_id) {
-            setOpen(true);
-        }
+        
+      //  console.log(listId);
+
+      //  setOpen();
+
+        listId[list_id] = Boolean(!listId[list_id]);
+        
+        
+        setListId(listId);
+
+       // setOpen(listId[list_id])
+
+        console.log(listId);
+       // console.log(list_id);
+        
     };
 
 
@@ -214,9 +226,9 @@ export default function PrimaryList({ more }) {
         id: "dashboards",
         name: 'Dashboards',
         icon: {
-            less: <DashboardIcon className={clsx(classes.icon, open && (listId === 'dashboards') ? classes.focus : '')} />,
+            less: <DashboardIcon className={clsx(classes.icon, listId["dashboards"] ? classes.focus : '')} />,
             more: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-                <DashboardIcon className={clsx(classes.icon, (listId === 'dashboards') && more ? classes.focus : '')} />
+                <DashboardIcon className={clsx(classes.icon, listId["dashboards"] && more ? classes.focus : '')} />
             </Tooltip>,
         },
         items: [
@@ -230,9 +242,9 @@ export default function PrimaryList({ more }) {
         id: 'examples',
         name: 'Examples',
         icon: {
-            less: <WebIcon className={clsx(classes.icon, open && (listId === 'examples') ? classes.focus : '')} />,
+            less: <WebIcon className={clsx(classes.icon, listId["examples"] ? classes.focus : '')} />,
             more: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-                <WebIcon className={clsx(classes.icon, (listId === 'examples') && more ? classes.focus : '')} />
+                <WebIcon className={clsx(classes.icon, listId["examples"] && more ? classes.focus : '')} />
             </Tooltip>,
         },
         items: [
@@ -248,9 +260,9 @@ export default function PrimaryList({ more }) {
         id: 'tables',
         name: 'Tables',
         icon: {
-            less: <PeopleIcon className={clsx(classes.icon, open && (listId === 'tables') ? classes.focus : '')} />,
+            less: <PeopleIcon className={clsx(classes.icon, listId["tables"] ? classes.focus : '')} />,
             more: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-                <WebIcon className={clsx(classes.icon, (listId === 'tables') ? classes.focus : '')} />
+                <WebIcon className={clsx(classes.icon, listId["tables"] ? classes.focus : '')} />
             </Tooltip>,
         },
         items: [
@@ -266,9 +278,9 @@ export default function PrimaryList({ more }) {
         id: 'forms',
         name: 'Forms',
         icon: {
-            less: <PeopleIcon className={clsx(classes.icon, open && (listId === 'forms') ? classes.focus : '')} />,
+            less: <PeopleIcon className={clsx(classes.icon, listId["forms"] ? classes.focus : '')} />,
             more: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-                <WebIcon className={clsx(classes.icon, (listId === 'forms') ? classes.focus : '')} />
+                <WebIcon className={clsx(classes.icon, listId["forms"] ? classes.focus : '')} />
             </Tooltip>,
         },
         items: [
@@ -299,19 +311,23 @@ export default function PrimaryList({ more }) {
         </ListItem>
     }
 
-    const renderList = (list, open, more) => {
+    const renderList = (list, more) => {
         return <React.Fragment>
-            <ListItem button onClick={() => handleClick(list.id)} className={classes.item}>
+
+            
+            
+            <ListItem button onClick={ () => handleClick(list.id) } className={classes.item}>
                 <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
                     {more ? list.icon.less : list.icon.more}
                 </ListItemIcon>
-                <ListItemText primary={list.name} disableTypography={true} style={{ paddingLeft: '6px' }} className={(listId == list.id && open) ? classes.focus : ''} />
-                {listId == list.id && open ? <ExpandMoreIcon className={(listId == list.id && open) ? classes.focus : ''} /> : <ChevronRightIcon />}
+                <ListItemText primary={ list.id } disableTypography={true} style={{ paddingLeft: '6px' }} className={listId[list.id] ? classes.focus : ''} />
+                {listId[list.id] ? <ExpandMoreIcon className={listId[list.id] ? classes.focus : ''} /> : <ChevronRightIcon />}
             </ListItem>
-            <Collapse in={listId == list.id && open} timeout="auto" unmountOnExit className={classes.collapse}>
+
+            <Collapse in={ listId[list.id] } timeout="auto" unmountOnExit className={classes.collapse}>
                 <List component="div" disablePadding>
                     {list.items.map((item, index) => {
-                        return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
+                        return <ListItem key={index} button component={Link} to={item.path} className={clsx(classes.nested)}>
                             <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
                                 <FiberManualRecordIcon className={classes.nestedIcon} />
                             </ListItemIcon>
@@ -323,8 +339,10 @@ export default function PrimaryList({ more }) {
         </React.Fragment>;
     }
 
+    console.log(listId['dashboards']);
+
     return (
-        <React.Fragment>
+
             <List
                 component="div"
                 disablePadding
@@ -340,36 +358,51 @@ export default function PrimaryList({ more }) {
                 }
                 className={classes.root}
             >
-                {renderList(dashboards, open, more)}
-                {renderList(examples, open, more)}
-                {renderList(forms, open, more)}
-                {renderList(tables, open, more)}
-                {renderItem(more)}
-                {renderItem(more)}
+                <ListItem button onClick={ () => handleClick('dashboards') } className={classes.item}>
+                <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                <FiberManualRecordIcon className={classes.nestedIcon} />
+                {listId['dashboards'] ? 'yes' : 'no'}
+                </ListItemIcon>
+                <ListItemText primary={ listId['dashboards'] ? 'Hasan' : 'Eliza' } disableTypography={true} style={{ paddingLeft: '6px' }} className={listId['dashboards'] ? classes.focus : ''} />
+                {listId['dashboards'] ? <ExpandMoreIcon className={listId['dashboards'] ? classes.focus : ''} /> : <ChevronRightIcon />}
+            </ListItem>
+
+            <Collapse in={ open } timeout="auto" unmountOnExit className={classes.collapse}>
+                <List component="div" disablePadding>
+                    {dashboards.items.map((item, index) => {
+                        return <ListItem key={index} button component={Link} to={item.path} className={clsx(classes.nested)}>
+                            <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                                <FiberManualRecordIcon className={classes.nestedIcon} />
+                            </ListItemIcon>
+                            <ListItemText primary={item.name} disableTypography={true} className={classes.nestedText} />
+                        </ListItem>
+                    })}
+                </List>
+            </Collapse>
+
+
+            <ListItem button onClick={ () => handleClick(forms.id) } className={classes.item}>
+                <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                <FiberManualRecordIcon className={classes.nestedIcon} />
+                </ListItemIcon>
+                <ListItemText primary={ forms.id } disableTypography={true} style={{ paddingLeft: '6px' }} className={listId[forms.id] ? classes.focus : ''} />
+                {listId['forms'] ? <ExpandMoreIcon className={listId['forms'] ? classes.focus : ''} /> : <ChevronRightIcon />}
+            </ListItem>
+
+            <Collapse in={ open } timeout="auto" unmountOnExit className={classes.collapse}>
+                <List component="div" disablePadding>
+                    {forms.items.map((item, index) => {
+                        return <ListItem key={index} button component={Link} to={item.path} className={clsx(classes.nested)}>
+                            <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+                                <FiberManualRecordIcon className={classes.nestedIcon} />
+                            </ListItemIcon>
+                            <ListItemText primary={item.name} disableTypography={true} className={classes.nestedText} />
+                        </ListItem>
+                    })}
+                </List>
+            </Collapse>
+
             </List>
 
-            <List
-                component="div"
-                disablePadding
-                aria-labelledby="nested-list-subheader"
-                subheader={
-                    <ListSubheader 
-                        component="span" 
-                        id="nested-list-subheader" 
-                        className={more ? classes.listSubheader : classes.hide}
-                    >
-                    SECONDARY
-                    </ListSubheader>
-                }
-                className={classes.root}
-            >
-                {renderList(dashboards, open, more)}
-                {renderList(forms, open, more)}
-                {renderList(tables, open, more)}
-                {renderItem(more)}
-                {renderItem(more)}
-            </List>
-
-        </React.Fragment>
     );
 }

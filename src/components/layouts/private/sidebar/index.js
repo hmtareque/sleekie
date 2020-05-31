@@ -11,7 +11,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { grey, blue, blueGrey } from '@material-ui/core/colors';
 
 import SlimScroller from '../../../SlimScroller';
-import PrimaryList from './drawer-list.component';
+import PrimaryList from './primary-list.component';
 import AppName from './app-name.component';
 
 const drawerWidth = 260;

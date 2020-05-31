@@ -4,30 +4,26 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 
-import { Animated } from "react-animated-css";
 
-function preventDefault(event) {
-    event.preventDefault();
-}
 
-const animateCSS = (element, animation, prefix = 'animate__') =>
-  // We create a Promise and return it
-  new Promise((resolve, reject) => {
-    const animationName = `${prefix}${animation}`;
-    const node = document.querySelector(element);
+// const animateCSS = (element, animation, prefix = 'animate__') =>
+//   // We create a Promise and return it
+//   new Promise((resolve, reject) => {
+//     const animationName = `${prefix}${animation}`;
+//     const node = document.querySelector(element);
 
-    node.classList.add(`${prefix}animated`, animationName);
+//     node.classList.add(`${prefix}animated`, animationName);
 
-    // When the animation ends, we clean the classes and resolve the Promise
-    function handleAnimationEnd() {
-      node.classList.remove(`${prefix}animated`, animationName);
-      node.removeEventListener('animationend', handleAnimationEnd);
+//     // When the animation ends, we clean the classes and resolve the Promise
+//     function handleAnimationEnd() {
+//       node.classList.remove(`${prefix}animated`, animationName);
+//       node.removeEventListener('animationend', handleAnimationEnd);
 
-      resolve('Animation ended');
-    }
+//       resolve('Animation ended');
+//     }
 
-    node.addEventListener('animationend', handleAnimationEnd);
-  });
+//     node.addEventListener('animationend', handleAnimationEnd);
+//   });
 
 const useStyles = makeStyles((theme) => ({
     depositContext: {
@@ -58,35 +54,36 @@ const AppName = ({ open }) => {
 
   //   const [seconds, setSeconds] = useState(0);
 
-     const [animate, setAnimate] = useState(1);
+  //    const [animate, setAnimate] = useState(1);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      //setSeconds(seconds => seconds + 1);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     //setSeconds(seconds => seconds + 1);
 
-      setAnimate(!animate);
+  //     setAnimate(!animate);
 
 
-    //   const element = document.querySelector('.name');
+  //   //   const element = document.querySelector('.name');
       
 
-    //   element.addEventListener('animationend', () => {
-    //     // do something
-    //     alert('test');
-    //   });
+  //   //   element.addEventListener('animationend', () => {
+  //   //     // do something
+  //   //     alert('test');
+  //   //   });
   
 
 
-    }, 10000);
-    return () => clearInterval(interval);
-  });
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // });
 
 
     return (
         <Typography className={clsx(classes.name, !open && classes.hide)} variant="span" noWrap>
-            <Animated className="name"  animationIn="shakeX" animationOut="shakeY" animationInDuration={1000} animationOutDuration={1000} isVisible={animate}>
+            {/* <Animated className="name"  animationIn="shakeX" animationOut="shakeY" animationInDuration={1000} animationOutDuration={1000} isVisible={animate}>
      Hasan Tareque
-            </Animated>
+            </Animated> */}
+            App Name
         </Typography>
     );
 }

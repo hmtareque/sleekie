@@ -48,8 +48,6 @@ import { blueGrey, blue } from '@material-ui/core/colors';
 import RoundBadge from '../../../RoundBadge';
 import { Divider } from '@material-ui/core';
 
-import SidebarListItem from './list-item.component';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -185,27 +183,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimaryList({ more }) {
   const classes = useStyles();
-  const [listId, setListId] = React.useState(0);
+  const [listId, setListId] = React.useState({});
   const [open, setOpen] = React.useState(false);
 
   const currentLocation = window.location.pathname;
 
   const history = useHistory();
 
-  const handleClick = (listId) => {
+  const handleClick = list_id => {
     setOpen(!open);
+    listId[list_id] = !listId[list_id];
     setListId(listId);
+
+    console.log(listId);
   };
 
-  const lessIcon = () => {
-
-  }
-
-  const moreIcon = (icon) => {
-    return <Tooltip title="Hasan" placement="right-start" onClick={() => history.push('/customers')}>
-      <icon className={clsx(classes.icon, open ? classes.focus : '')} />
-    </Tooltip>
-  }
 
   const test1 = { 
     name: 'Dashboards', 
@@ -215,6 +207,7 @@ export default function PrimaryList({ more }) {
 
 
   const dashboards = {
+    id: "dashboard",
     name: 'Dashboards',
     icon: {
       less: <PeopleOutlineIcon className={clsx(classes.icon, open ? classes.focus : '')} />,
@@ -229,6 +222,7 @@ export default function PrimaryList({ more }) {
   }
 
   const tables = {
+    id: "table",
     name: 'Tables',
     icon: {
       less: <PeopleIcon className={clsx(classes.icon, open && more ? classes.focus : '')} />,
@@ -246,6 +240,7 @@ export default function PrimaryList({ more }) {
   }
 
   const forms = {
+    id: "form",
     name: 'Forms',
     icon: {
       less: <PeopleOutlineIcon className={clsx(classes.icon, open ? classes.focus : '')} />,
@@ -281,14 +276,37 @@ export default function PrimaryList({ more }) {
 
   const renderList = (list, open, more) => {
     return <React.Fragment>
-      <ListItem button onClick={() => handleClick(1)} className={classes.item}>
+
+
+{ more ? 
+
+<ListItem button onClick={() => handleClick(list.id)} className={classes.item}>
         <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-          {more ? list.icon.less : list.icon.more}
+        <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
+        <WebIcon className={clsx(classes.icon, listId[list.id] && more ? classes.focus : '')} />
+      </Tooltip>
         </ListItemIcon>
-        <ListItemText primary={list.name} disableTypography={true} style={{ paddingLeft: '6px' }} className={open ? classes.focus : ''} />
-        {open ? <ExpandMoreIcon className={open ? classes.focus : ''} /> : <ChevronRightIcon />}
+        <ListItemText primary={list.name} disableTypography={true} style={{ paddingLeft: '6px' }} className={ listId[list.id] ? classes.focus : ''} />
+        { listId[list.id] ? <ExpandMoreIcon className={ listId[list.id] ? classes.focus : ''} /> : <ChevronRightIcon />}
       </ListItem>
-      <Collapse in={(listId === 1) && open && more} timeout="auto" unmountOnExit className={classes.collapse}>
+
+      : 
+
+      <ListItem button component={Link} to={'/test'} className={classes.item}>
+      <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+        <TableChartIcon className={classes.icon} />
+      </ListItemIcon>
+      <ListItemText primary={'Test'} disableTypography={true} />
+    </ListItem>
+
+}
+
+
+      
+
+
+
+      <Collapse in={ listId[list.id] && more } timeout="auto" unmountOnExit className={classes.collapse}>
         <List component="div" disablePadding>
           {list.items.map((item, index) => {
             return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
@@ -314,8 +332,6 @@ export default function PrimaryList({ more }) {
       }
       className={classes.root}
     >
-
-      <SidebarListItem item={ test1 } />
 
       {/* {list.map((item, index) => {
         return <ListItem button component={Link} to={item.path} key={index} className={clsx(classes.item, (item.path === currentLocation) && classes.active)}>

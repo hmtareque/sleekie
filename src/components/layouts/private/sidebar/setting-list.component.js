@@ -45,7 +45,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Badge from '@material-ui/core/Badge';
 
 import { blueGrey, blue } from '@material-ui/core/colors';
-import RoundBadge from '../RoundBadge';
+import RoundBadge from '../../../RoundBadge';
 import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -207,6 +207,7 @@ export default function PrimaryList({ more }) {
 
 
   const dashboards = {
+    id: "dashboards",
     name: 'Dashboards',
     icon: {
       less: <PeopleOutlineIcon className={clsx(classes.icon, open ? classes.focus : '')} />,
@@ -221,6 +222,7 @@ export default function PrimaryList({ more }) {
   }
 
   const tables = {
+    id: "tables",
     name: 'Tables',
     icon: {
       less: <PeopleIcon className={clsx(classes.icon, open && more ? classes.focus : '')} />,
