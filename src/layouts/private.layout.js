@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
 import Topbar from '../components/layouts/private/topbar.component';
-import Sidebar from '../components/layouts/private/sidebar.component';
+import Sidebar from '../components/layouts/private/sidebar';
 import Footer from '../components/layouts/private/footer.component';
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
    // backgroundColor: fade(theme.palette.pink, 0.075),
   },
   container: {
-    minHeight: '560px',
+    minHeight: '600px',
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(1),
   }

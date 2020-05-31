@@ -23,8 +23,25 @@ const sidebar = {
 //   }
 // }
 
+const custom = false; 
+
+// {
+//   sidebar: {
+//     color: '#ffffff',
+//   }
+// }
+
 
 const theme = createMuiTheme({
+  custom,
+  palette: {
+    primary: {
+      main: '#292627',
+    },
+    info: {
+      main: '#e2a03c',
+    }
+  },
 overrides: {
   // MuiBadge: {
   //   colorSecondary:  {

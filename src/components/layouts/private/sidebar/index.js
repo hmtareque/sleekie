@@ -10,9 +10,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { grey, blue, blueGrey } from '@material-ui/core/colors';
 
-import SlimScroller from '../../../components/SlimScroller';
-import PrimaryList from '../../../components/slidebar/primary-list.component';
-import AppName from '../../app/name.component';
+import SlimScroller from '../../../SlimScroller';
+import PrimaryList from './drawer-list.component';
+import AppName from './app-name.component';
 
 const drawerWidth = 260;
 
@@ -34,13 +34,18 @@ const useStyles = makeStyles((theme) => ({
   drawerToolbar: {
     display: 'flex',
     padding: '8px',
+
+     [theme.breakpoints.down('xs')]: {
+      padding: '4px 8px',
+    },
+
     backgroundColor: theme.palette.primary.dark,
    // borderBottom: `1px solid ${theme.palette.primary.main}`,
     //  boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
   },
 
   menuButton: {
-    color: theme.palette.info.light,
+    color: theme.custom ? theme.custom.sidebar.color : theme.palette.info.light,
     marginLeft: 0,
   },
 
@@ -59,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
     }),
     height: '100%',
     //backgroundColor: theme.palette.primary.dark,
-    backgroundColor: 'rgba(50, 60, 93, 1)',
-    color: fade('#ffffff', 0.6),
+    backgroundColor: theme.palette.primary.dark, //'rgba(50, 60, 93, 1)',
+    color: theme.palette.info.light,
     fontWeight: 500,
 
   },
@@ -75,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   scrollWrapper: {
-    backgroundColor: 'rgba(37, 48, 83, 1)',
+    backgroundColor: fade(theme.palette.primary.main, 0.8), //'rgba(37, 48, 83, 1)',
   //  borderBottom: `1px solid ${theme.palette.primary.main}`,
   //  height: `calc(100vh - 64px)`,
    // borderRight: '1px solid red',
@@ -101,9 +106,7 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
           <ChevronLeftIcon />
         </IconButton>
 
-        {/* <Typography className={clsx(classes.appName, !open && classes.hide)} variant="span" noWrap>
-          {appName}
-        </Typography> */}
+       
 
         <AppName open={open} />
 
@@ -123,8 +126,7 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
 
       <SlimScroller style={{ height: 620 }}  autoHide autoHideTimeout={500} autoHideDuration={200}>
         <PrimaryList more={open} />
-        <PrimaryList more={open} />
-        <PrimaryList more={open} />
+        {/* <PrimaryList more={open} /> */}
       </SlimScroller>
 
       </div>
