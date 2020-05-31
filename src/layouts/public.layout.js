@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
-import Footer from './components/footer.component';
-
 const useStyles = makeStyles(theme => ({
   root: {}
 }));

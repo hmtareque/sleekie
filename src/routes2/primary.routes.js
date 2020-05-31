@@ -1,30 +1,23 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
-import RouteWithLayout from './components/layouts/layout.component';
+import RouteWithLayout from '../components/layouts/layout.component';
 
-import PrivateLayout from './layouts/private.layout';
-import PublicLayout from './layouts/public.layout';
+import PrivateLayout from '../layouts/private.layout';
+import PublicLayout from '../layouts/public.layout';
 
-import Dashboard from './views/dashboard.view';
-import Customers from './views/customers.view';
-import SignupForm from './views/form.view';
-import RecipeReviewCard from './views/test.view';
+import Dashboard from '../views/dashboard.view';
+import Customers from '../views/customers.view';
+import SignupForm from '../views/form.view';
+import RecipeReviewCard from '../views/test.view';
 
-// tables 
-import SimpleTable from './views/tables/simple.table';
-import EnhancedTable from './views/tables/enhanced.table';
-import DenseTable from './views/tables/dense.table';
-import FixHeadTable from './views/tables/fix-head.table';
-import MaterialTable from './views/tables/material.table';
+import SignIn from '../views/auth/sign-in.view';
+import SignInSide from '../views/auth/sign-in-side.view';
+import ForgotPassword from '../views/auth/reset-password.view';
 
-import SignIn from './views/auth/sign-in.view';
-import SignInSide from './views/auth/sign-in-side.view';
-import ForgotPassword from './views/auth/reset-password.view';
+import NotFound from '../views/errors/404';
 
-import NotFound from './views/errors/404';
-
-const Routes = () => {
+const PrimaryRoutes = () => {
   return (
     <Switch>
       <Redirect
@@ -60,15 +53,6 @@ const Routes = () => {
         layout={PrivateLayout}
         path="/card"
       />
-
-<RouteWithLayout title="Simple" component={SimpleTable} exact layout={PrivateLayout} path="/tables/simple" />
-<RouteWithLayout title="Enhanced" component={EnhancedTable} exact layout={PrivateLayout} path="/tables/enhanced" />
-<RouteWithLayout title="Dense" component={DenseTable} exact layout={PrivateLayout} path="/tables/dense" />
-<RouteWithLayout title="Fixed Head" component={FixHeadTable} exact layout={PrivateLayout} path="/tables/fix-head" />
-<RouteWithLayout title="Material" component={MaterialTable} exact layout={PrivateLayout} path="/tables/material" />
-
-
-
 
       <RouteWithLayout
         title="Sign In"
@@ -109,4 +93,4 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+export default PrimaryRoutes;

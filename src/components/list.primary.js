@@ -43,7 +43,7 @@ import RoundBadge from './RoundBadge';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 240,
+    maxWidth: 260,
   //  backgroundColor: blueGrey[900],
   //backgroundColor: fade(theme.palette.mustard, 0.8),
   //background: 'linear-gradient(45deg, #ffffff 30%, #000000 90%)',

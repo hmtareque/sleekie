@@ -11,40 +11,36 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { grey, blue, blueGrey } from '@material-ui/core/colors';
 
 import SlimScroller from '../../../components/SlimScroller';
-import PrimaryList from '../../../components/list.primary';
+import PrimaryList from '../../../components/slidebar/primary-list.component';
+import AppName from '../../app/name.component';
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
 
-  appName: {
-    color: 'white',
-    padding: '8px 5px',
-    width: '200px',
-    fontWeight: 'bold',
 
-  },
 
   toolbar: {
     minHeight: '64px'
   },
   toolbarIcon: {
-    // color: 'white',
+     color: theme.palette.info.light,
     //  marginLeft: '-4px',
   },
 
   drawerToolbar: {
     display: 'flex',
     padding: '8px',
-    backgroundColor: theme.palette.black,
+    backgroundColor: theme.palette.primary.dark,
+   // borderBottom: `1px solid ${theme.palette.primary.main}`,
     //  boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
   },
 
   menuButton: {
-  //  color: theme.palette.dark,
+    color: theme.palette.info.light,
     marginLeft: 0,
   },
 
@@ -56,13 +52,16 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
- //   borderColor: theme.palette.mustard,
+   borderColor: theme.palette.primary.main,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
     height: '100%',
-  //   backgroundColor: theme.palette.mustard,
+    //backgroundColor: theme.palette.primary.dark,
+    backgroundColor: 'rgba(50, 60, 93, 1)',
+    color: fade('#ffffff', 0.6),
+    fontWeight: 500,
 
   },
 
@@ -74,6 +73,13 @@ const useStyles = makeStyles((theme) => ({
     }),
     width: theme.spacing(8),
   },
+
+  scrollWrapper: {
+    backgroundColor: 'rgba(37, 48, 83, 1)',
+  //  borderBottom: `1px solid ${theme.palette.primary.main}`,
+  //  height: `calc(100vh - 64px)`,
+   // borderRight: '1px solid red',
+  }
 
 }));
 
@@ -95,9 +101,11 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
           <ChevronLeftIcon />
         </IconButton>
 
-        <Typography className={clsx(classes.appName, !open && classes.hide)} variant="h6" noWrap>
+        {/* <Typography className={clsx(classes.appName, !open && classes.hide)} variant="span" noWrap>
           {appName}
-        </Typography>
+        </Typography> */}
+
+        <AppName open={open} />
 
         <IconButton
           edge="start"
@@ -110,11 +118,18 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
         </IconButton>
       </div>
 
-      <SlimScroller style={{height: 640}}  autoHide autoHideTimeout={500} autoHideDuration={200}>
+<div className={classes.scrollWrapper}>
+
+
+      <SlimScroller style={{ height: 620 }}  autoHide autoHideTimeout={500} autoHideDuration={200}>
+        <PrimaryList more={open} />
+        <PrimaryList more={open} />
         <PrimaryList more={open} />
       </SlimScroller>
 
-    
+      </div>
+
+    <div className={classes.brand} style={{width: '100%', textAlign: 'center', padding: '16px', fontFamily: 'fantasy'}}>When you need help?</div>
 
     </Drawer>
   );

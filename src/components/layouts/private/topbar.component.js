@@ -17,45 +17,38 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
 import Button from '@material-ui/core/Button';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { blue } from '@material-ui/core/colors';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import AuthMenu from './auth-menu.component';
+
+import { Link } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
+
 const StyledBadge = withStyles((theme) => ({
   badge: {
-    color: theme.palette.white,
-   // backgroundColor: theme.palette.pink,
+    //  color: theme.palette.white,
+    // backgroundColor: theme.palette.pink,
   },
 }))(Badge);
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
 
-  toolbar: {
-    //paddingRight: 24, // keep right padding when drawer closed
-    minHeight: '64px'
-  },
-  toolbarIcon: {
-    color: theme.palette.info.dark,
-    marginLeft: '-4px',
-  },
-
   appBar: {
-  //  backgroundColor: theme.palette.dark,
+    //backgroundColor: 'rgba(5,255,5, 0.35)',
     width: `calc(100% - 64px)`,
-  //  color: theme.palette.mustard,
     boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    // transition: theme.transitions.create(['width', 'margin'], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
   },
-  
+
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -69,11 +62,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 
-  appBarSpacer: theme.mixins.toolbar,
-  
-  fixedHeight: {
-    height: 240,
-  },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -135,31 +123,29 @@ const useStyles = makeStyles((theme) => ({
   },
 
   profileButton: {
- //   color: theme.palette.mustard,
-   // border: 'none',
-  //  textDecoration: 'none',
+    //   color: theme.palette.mustard,
+    // border: 'none',
+    //  textDecoration: 'none',
     textTransform: 'none',
-   // padding: '0px 5px',
+    // padding: '0px 5px',
     margin: theme.spacing(1),
     marginLeft: theme.spacing(2),
-    borderColor: theme.palette.mustard,
+    color: theme.palette.info.light,
+    borderColor: theme.palette.info.light,
+
     '&:hover': {
-     // color: theme.palette.pink,
-     // borderColor: theme.palette.pink,
+      // color: theme.palette.pink,
+      // borderColor: theme.palette.pink,
+      backgroundColor: theme.palette.primary.dark,
     }
   },
 
-  badge: {
-    'span': {
-    //  backgroundColor: theme.palette.pink,
-    }
-    
-  }
+   
 }));
 
 const Topbar = ({ title, onSidebarOpen }) => {
   const classes = useStyles();
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -187,15 +173,19 @@ const Topbar = ({ title, onSidebarOpen }) => {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      style={{marginTop: '40px'}}
     >
+      <MenuItem size="small">Welcome</MenuItem>
+      <Divider/>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <Divider/>
       <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
@@ -220,7 +210,8 @@ const Topbar = ({ title, onSidebarOpen }) => {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem style={{padding: '0px'}} component={Link} to="/test">
+
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
@@ -246,9 +237,9 @@ const Topbar = ({ title, onSidebarOpen }) => {
     <div>
       <AppBar position="absolute" className={clsx(classes.appBar, onSidebarOpen && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
-          
+
           <Typography className={classes.title} variant="h6" noWrap>
-            { title }
+            {title}
           </Typography>
 
           <div className={classes.search}>
@@ -268,27 +259,29 @@ const Topbar = ({ title, onSidebarOpen }) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
-            <StyledBadge badgeContent={4}>
+              <Badge badgeContent={49} color="secondary">
                 <MailIcon />
-                </StyledBadge>
+              </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <StyledBadge badgeContent={'9+'}>
+              <Badge badgeContent={'9+'} color="error">
                 <NotificationsIcon />
-              </StyledBadge>
+              </Badge>
             </IconButton>
 
 
             <Button
-        variant="outlined"
-        className={classes.profileButton}
+              variant="outlined"
+              size="small"
+              className={classes.profileButton}
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-        startIcon={<AccountCircle />}
-        endIcon={<ExpandMore />}
-      >Hasan Tareque</Button>
+              startIcon={<AccountCircle />}
+              endIcon={<ExpandMore />}
+            >Hasan Tareque</Button>  
+
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -306,7 +299,7 @@ const Topbar = ({ title, onSidebarOpen }) => {
 
       {renderMobileMenu}
       {renderMenu}
-      </div>
+    </div>
   );
 }
 

@@ -6,9 +6,9 @@ import { blue } from '@material-ui/core/colors';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
-import Topbar from './components/topbar.component';
-import Sidebar from './components/sidebar.component';
-import Footer from './components/footer.component';
+import Topbar from '../components/layouts/private/topbar.component';
+import Sidebar from '../components/layouts/private/sidebar.component';
+import Footer from '../components/layouts/private/footer.component';
 
 const useStyles = makeStyles(theme => ({
   root: {
