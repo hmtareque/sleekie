@@ -22,6 +22,7 @@ import SignIn from './views/auth/sign-in.view';
 import SignInSide from './views/auth/sign-in-side.view';
 import ForgotPassword from './views/auth/reset-password.view';
 
+import Help from './views/help.view';
 import NotFound from './views/errors/404';
 
 const Routes = () => {
@@ -70,6 +71,10 @@ const Routes = () => {
 
 <RouteWithLayout title="Charts" component={MaterialTable} exact layout={PrivateLayout} path="/charts" />
 <RouteWithLayout title="Calendar" component={Dashboard} exact layout={PrivateLayout} path="/calendar" />
+
+      <RouteWithLayout title="Help" component={Help} exact layout={PrivateLayout} path="/help" />
+      
+      
       <RouteWithLayout
         title="Sign In"
         component={SignIn}

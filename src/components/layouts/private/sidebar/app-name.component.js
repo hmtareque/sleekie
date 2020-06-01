@@ -88,8 +88,8 @@ const AppName = ({ open }) => {
 
     return (
         <Typography className={clsx(classes.name, !open && classes.hide)} variant="div" noWrap>
-            <Animated className="name"  animationIn="shakeX" animationOut="shakeY" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
-                APP <div className={classes.fun}>NAME</div>
+            <Animated className="name"  animationIn="pulse" animationOut="shakeY" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
+                APPNAME
             </Animated>
         </Typography>
     );

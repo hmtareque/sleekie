@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import IconButton from '@material-ui/core/IconButton';
-
 import Tooltip from '@material-ui/core/Tooltip';
-
-import { Link } from 'react-router-dom';
-
 import { Animated } from 'react-animated-css';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,17 +29,22 @@ const useStyles = makeStyles((theme) => ({
     },
 
     helpButton: {
+        padding: theme.spacing(0.5, 2),
         backgroundColor: theme.palette.secondary.main,
-        color: theme.palette.grey[200],
-
+        color: theme.palette.common.white,
         '&:hover': {
             backgroundColor: theme.palette.secondary.dark,
-            color: theme.palette.common.white,
         }
     },
 
+    helpButtonIcon: {
+        float: 'left',
+        fontSize: '1.25rem',
+        color: theme.palette.common.white,
+    },
+
     smallHelpButton: {
-        padding: 0,
+        padding: 0
     },
 
     smallHelpButtonIcon: {
@@ -52,10 +54,6 @@ const useStyles = makeStyles((theme) => ({
         }
     },
 
-    helpButtonIcon: {
-        color: 'white'
-    }
-    ,
     hide: {
         display: 'none',
     },
@@ -68,32 +66,35 @@ const HelpLink = ({ expanded }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             setMove(!move);
-        }, 4000);
+        }, 5000);
         return () => clearInterval(interval);
     });
 
     return (
         <div className={clsx(classes.root)}>
-            <Typography className={expanded ? classes.text : classes.hide} variant="p" noWrap>
+            <Typography className={expanded ? classes.text : classes.hide} variant="h3" noWrap>
                 How it works?
-            </Typography>
+        </Typography>
 
-            <Animated className="name" animationIn="shakeX" animationOut="shakeY" animationInDuration={1000} animationOutDuration={1000} isVisible={move}>
-                <Button
-                    variant="contained"
-                    size="small"
-                    className={expanded ? classes.helpButton : classes.hide}
-                    startIcon={<ContactSupportIcon className={classes.helpButtonIcon} />}
-                    component={Link}
-                    to="/help"
-                >
-                    Help
-                    </Button>
+            <Button
+                variant="contained"
+                size="small"
+                className={expanded ? classes.helpButton : classes.hide}
+                component={Link}
+                to="/help"
+            >
+                <Animated animationIn="shakeX" animationOut="heartBeat" animationInDuration={2000} animationOutDuration={2000} isVisible={move}>
+                    <ContactSupportIcon className={classes.helpButtonIcon} /> Help
+                </Animated>
+            </Button>
 
-                <IconButton aria-label="delete" className={expanded ? classes.hide : classes.smallHelpButton} component={Link} to="/help">
-                    <Tooltip title="Need help?" placement="right-start"><ContactSupportIcon className={classes.smallHelpButtonIcon} /></Tooltip>
-                </IconButton>
-            </Animated>
+            <IconButton aria-label="delete" className={expanded ? classes.hide : classes.smallHelpButton} component={Link} to="/help">
+                <Animated animationIn="shakeX" animationOut="heartBeat" animationInDuration={2000} animationOutDuration={2000} isVisible={move}>
+                    <Tooltip title="Need help?" placement="right-start">
+                        <ContactSupportIcon className={classes.smallHelpButtonIcon} />
+                    </Tooltip>
+                </Animated>
+            </IconButton>
         </div>
     );
 }
