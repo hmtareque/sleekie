@@ -12,9 +12,8 @@ import { grey, blue, blueGrey } from '@material-ui/core/colors';
 
 import SlimScroller from '../../../SlimScroller';
 import PrimaryList from './primary-list.component';
-import SecondaryList from './secondary-list.component';
-import SettingList from './setting-list.component';
 import AppName from './app-name.component';
+import HelpLink from './help-link.component';
 
 const drawerWidth = 260;
 
@@ -134,7 +133,7 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
 
       </div>
 
-    <div className={classes.brand} style={{width: '100%', textAlign: 'center', padding: '16px', fontFamily: 'fantasy'}}>When you need help?</div>
+    <HelpLink expanded={ open } />
 
     </Drawer>
   );

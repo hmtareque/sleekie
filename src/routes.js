@@ -68,8 +68,8 @@ const Routes = () => {
 <RouteWithLayout title="Material" component={MaterialTable} exact layout={PrivateLayout} path="/tables/material" />
 
 
-
-
+<RouteWithLayout title="Charts" component={MaterialTable} exact layout={PrivateLayout} path="/charts" />
+<RouteWithLayout title="Calendar" component={Dashboard} exact layout={PrivateLayout} path="/calendar" />
       <RouteWithLayout
         title="Sign In"
         component={SignIn}

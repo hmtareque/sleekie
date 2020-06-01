@@ -76,6 +76,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '25px',
   },
 
+  nestedFocus: {
+    color: theme.palette.grey[300],
+    borderLeft: `2px solid ${theme.palette.grey[300]}`,
+  },
+
   item: {
     fontFamily: ["Heebo", "sans-serif"].join(','),
     fontSize: '1.0rem',
@@ -107,12 +112,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'none'
   },
 
-  active: {
-    // fontWeight: 600,
-    // color: blue[800],
-    // backgroundColor: fade(theme.palette.dark, 0.1),
-
-  },
 
   listSubheader: {
     display: 'block',
@@ -317,7 +316,7 @@ export default function PrimaryList({ more }) {
       <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
         { more ? item.icon.more : item.icon.less }
       </ListItemIcon>
-      <ListItemText primary={ item.name } disableTypography={true} className={classes.itemText} />
+      <ListItemText primary={ item.name } disableTypography={true} className={clsx(classes.itemText, (currentLocation === item.path)? classes.focus : '')} />
     </ListItem>
   }
 
@@ -351,9 +350,9 @@ export default function PrimaryList({ more }) {
           {list.items.map((item, index) => {
             return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
               <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-                <FiberManualRecordIcon className={classes.nestedIcon} />
+                <FiberManualRecordIcon className={clsx(classes.nestedIcon, (currentLocation === item.path) && classes.focus)} />
               </ListItemIcon>
-              <ListItemText primary={item.name} disableTypography={true} className={classes.nestedText} />
+              <ListItemText primary={item.name} disableTypography={true} className={clsx(classes.nestedText, (currentLocation === item.path) && classes.nestedFocus)} />
             </ListItem>
           })}
         </List>

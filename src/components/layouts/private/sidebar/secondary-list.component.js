@@ -218,27 +218,7 @@ export default function SecondaryList({ more }) {
     { name: 'Sign In by Side', 'path': '/tables/fix-head' },
   ];
 
-  const charts = {
-    name: 'Charts',
-    icon: {
-      more: <BarChartIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />,
-      less: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-        <BarChartIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />
-      </Tooltip>,
-    },
-    path: '/charts'
-  }
 
-  const calendar = {
-    name: 'Calendar',
-    icon: {
-      more: <EventIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />,
-      less: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-        <EventIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />
-      </Tooltip>,
-    },
-    path: '/calendar'
-  }
 
   const renderItem = (item, more) => {
     return <ListItem button component={Link} to={ item.path } className={classes.item}>
