@@ -7,13 +7,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
@@ -38,6 +31,7 @@ import WebIcon from '@material-ui/icons/Web';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import MapIcon from '@material-ui/icons/Map';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
@@ -52,85 +46,45 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 260,
-    //  backgroundColor: blueGrey[900],
-    //backgroundColor: fade(theme.palette.mustard, 0.8),
-    //background: 'linear-gradient(45deg, #ffffff 30%, #000000 90%)',
   },
+
   nested: {
-    //  paddingLeft: theme.spacing(7),
     padding: 0,
     margin: 0,
-    // backgroundColor: fade(theme.palette.grey[200], 0.4),
-    //paddingTop: '4px',
-    //paddingBottom: '4px',
-
-    //  marginLeft: '32px',
-    //  borderLeft: '2px solid rgba(50, 60, 93, 1)',
     backgroundColor: theme.palette.primary.dark,
-
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
     }
-
   },
 
   nestedText: {
     paddingLeft: '25px',
-    // paddingTop: '6px',
-    // paddingBottom: '6px',
-    // backgroundColor: fade(theme.palette.grey[200], 0.4),
-    //paddingTop: '4px',
-    //paddingBottom: '4px',
     fontSize: '1rem',
-    //  marginLeft: '-16px',
     borderLeft: `2px solid ${theme.palette.info.dark}`,
-    // backgroundColor: theme.palette.primary.dark,
     lineHeight: '32px',
     margin: 0,
     paddingTop: '8px',
     paddingBottom: '8px',
-
-    '&:hover': {
-      // color: 'white',
-    }
   },
 
   nestedIcon: {
     color: theme.palette.info.dark,
-    //  marginLeft: '-25px', 
     width: '16px',
-    // margin: 0,
     marginRight: '-16px',
     marginLeft: '25px',
-    //  paddingLeft: '24px',
-    //  paddingRight: '24px',
-
-  },
-
-  collapse: {
-    //backgroundColor: theme.palette.primary.dark,
   },
 
   item: {
-    // paddingTop: '6px',
-    //  paddingBottom: '6px',
-    // fontSize: '16px',
-    // fontWeight: '500',
-
-    fontWeight: 500,
     fontFamily: ["Heebo", "sans-serif"].join(','),
     fontSize: '1rem',
-    // color: theme.palette.dark,
+    fontWeight: 500,
     paddingLeft: '20px',
     '&:hover': {
-      // fontWeight: 600,
       backgroundColor: fade(theme.palette.primary.dark, 0.7),
-      //  color: theme.palette.black,
-
-
     },
-
-
+  },
+  itemText: {
+    paddingLeft: '6px',
   },
 
   icon: {
@@ -149,15 +103,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'none'
   },
 
-  block: {
-    display: 'block',
-    color: '#dddddd',
-    backgroundColor: fade('rgba(37, 48, 83, 1)', 0.9),
-    fontSize: '0.8rem',
-    paddingTop: '0px',
-    paddingBottom: '0px',
-
-  },
   active: {
     // fontWeight: 600,
     // color: blue[800],
@@ -177,100 +122,159 @@ const useStyles = makeStyles((theme) => ({
   },
 
   focus: {
-    color: theme.palette.grey[50]
+    color: theme.palette.grey[100]
   },
+
 }));
 
-export default function PrimaryList({ more }) {
+export default function SecondaryList({ more }) {
   const classes = useStyles();
-  const [listId, setListId] = React.useState(0);
+  const [toggleList, setToggleList] = React.useState({});
   const [open, setOpen] = React.useState(false);
 
   const currentLocation = window.location.pathname;
 
   const history = useHistory();
 
-  const handleClick = (listId) => {
+  const handleClick = list_id => {
     setOpen(!open);
-    setListId(listId);
+    toggleList[list_id] = !toggleList[list_id];
+    setToggleList(toggleList);
+
+    console.log(toggleList);
   };
 
 
-  const dashboards = {
-    name: 'Dashboards',
+  const maps = {
+    id: "maps",
+    name: 'Maps',
     icon: {
-      less: <PeopleOutlineIcon className={clsx(classes.icon, open ? classes.focus : '')} />,
-      more: <PeopleOutlineIcon className={clsx(classes.icon, open ? classes.focus : '')} onClick={() => history.push('/customers')} />,
+      more: <MapIcon className={clsx(classes.icon, toggleList['maps'] ? classes.focus : '')} />,
+      less: <Tooltip title="Dashboard" placement="right-start" onClick={() => history.push('/maps/one')}>
+        <MapIcon className={clsx(classes.icon, toggleList['maps'] ? classes.focus : '')} />
+      </Tooltip>,
     },
     items: [
-      { name: 'Dashboards', 'path': '/dashboard', icon: <DashboardIcon className={classes.icon} /> },
-      { name: 'Examples', 'path': '/customers', icon: <PeopleIcon className={classes.icon} /> },
-      { name: 'Components', 'path': '/card', icon: <PeopleOutlineIcon className={classes.icon} />, badge: <RoundBadge info={'5'} /> },
-      { name: 'Maps', 'path': '/form', icon: <PeopleOutlineIcon className={classes.icon} /> },
+      { name: 'Google Map', 'path': '/dashboard', },
+      { name: 'Vector Map', 'path': '/customers', },
+    ]
+  }
+
+  const components = {
+    id: "components",
+    name: 'Components',
+    icon: {
+      more: <WidgetsIcon className={clsx(classes.icon, toggleList['components'] ? classes.focus : '')} />,
+      less: <Tooltip title="Dashboard" placement="right-start" onClick={() => history.push('/components/one')}>
+        <WidgetsIcon className={clsx(classes.icon, toggleList['components'] ? classes.focus : '')} />
+      </Tooltip>,
+    },
+    items: [
+      { name: 'Dashboards', 'path': '/dashboard', },
+      { name: 'Examples', 'path': '/customers', },
+      { name: 'Components', 'path': '/card', },
+      { name: 'Maps', 'path': '/form', },
     ]
   }
 
   const tables = {
+    id: "tables",
     name: 'Tables',
     icon: {
-      less: <PeopleIcon className={clsx(classes.icon, open && more ? classes.focus : '')} />,
-      more: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-        <WebIcon className={clsx(classes.icon, open && more ? classes.focus : '')} />
+      more: <TableChartIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />,
+      less: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
+        <TableChartIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />
       </Tooltip>,
     },
     items: [
-      { name: 'Simple', 'path': '/tables/simple', icon: <DashboardIcon className={classes.icon} /> },
-      { name: 'Fix Head', 'path': '/tables/fix-head', icon: <BarChartIcon className={classes.icon} /> },
-      { name: 'Enhanced', 'path': '/tables/enhanced', icon: <PeopleOutlineIcon className={classes.icon} /> },
-      { name: 'Dense', 'path': '/tables/dense', icon: <PeopleOutlineIcon className={classes.icon} /> },
-      { name: 'Material', 'path': '/tables/material', icon: <PeopleOutlineIcon className={classes.icon} /> },
+      { name: 'Simple', 'path': '/tables/simple', },
+      { name: 'Fix Head', 'path': '/tables/fix-head', },
+      { name: 'Enhanced', 'path': '/tables/enhanced', },
+      { name: 'Dense', 'path': '/tables/dense', },
+      { name: 'Material', 'path': '/tables/material', },
     ]
   }
 
   const forms = {
+    id: "forms",
     name: 'Forms',
     icon: {
-      less: <PeopleOutlineIcon className={clsx(classes.icon, open ? classes.focus : '')} />,
-      more: <PeopleOutlineIcon className={clsx(classes.icon, open ? classes.focus : '')} onClick={() => history.push('/customers')} />,
+      more: <PostAddIcon className={clsx(classes.icon, toggleList['forms'] ? classes.focus : '')} />,
+      less: <Tooltip title="Form" placement="right-start" onClick={() => history.push('/forms/material')}>
+        <PostAddIcon className={clsx(classes.icon, toggleList['forms'] ? classes.focus : '')} />
+      </Tooltip>,
     },
     items: [
-      { name: 'Simple', 'path': '/tables/simple', icon: <DashboardIcon /> },
-      { name: 'Fix Head', 'path': '/tables/fix-head', icon: <BarChartIcon /> },
-      { name: 'Enhanced', 'path': '/tables/enhanced', icon: <PeopleOutlineIcon /> },
-      { name: 'Dense', 'path': '/tables/dense', icon: <PeopleOutlineIcon /> },
-      { name: 'Material', 'path': '/tables/material', icon: <PeopleOutlineIcon /> },
+      { name: 'Simple', 'path': '/tables/simple', },
+      { name: 'Fix Head', 'path': '/tables/fix-head', },
+      { name: 'Enhanced', 'path': '/tables/enhanced', },
+      { name: 'Dense', 'path': '/tables/dense', },
+      { name: 'Material', 'path': '/tables/material', },
     ]
   }
-
-  const maps = [
-    { name: 'Google', 'path': '/tables/simple', icon: <DashboardIcon /> },
-    { name: 'Vector', 'path': '/tables/fix-head', icon: <BarChartIcon /> },
-  ];
 
   const auth = [
     { name: 'Sign In', 'path': '/login' },
     { name: 'Sign In by Side', 'path': '/tables/fix-head' },
   ];
 
-  const renderItem = ({ more }) => {
-    return <ListItem button component={Link} to={'/test'} className={classes.item}>
+  const charts = {
+    name: 'Charts',
+    icon: {
+      more: <BarChartIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />,
+      less: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
+        <BarChartIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />
+      </Tooltip>,
+    },
+    path: '/charts'
+  }
+
+  const calendar = {
+    name: 'Calendar',
+    icon: {
+      more: <EventIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />,
+      less: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
+        <EventIcon className={clsx(classes.icon, toggleList['tables'] ? classes.focus : '')} />
+      </Tooltip>,
+    },
+    path: '/calendar'
+  }
+
+  const renderItem = (item, more) => {
+    return <ListItem button component={Link} to={ item.path } className={classes.item}>
       <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-        <TableChartIcon className={classes.icon} />
+        { more ? item.icon.more : item.icon.less }
       </ListItemIcon>
-      <ListItemText primary={'Test'} disableTypography={true} />
+      <ListItemText primary={ item.name } disableTypography={true} className={classes.itemText} />
     </ListItem>
   }
 
   const renderList = (list, open, more) => {
     return <React.Fragment>
-      <ListItem button onClick={() => handleClick(1)} className={classes.item}>
-        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-          {more ? list.icon.less : list.icon.more}
-        </ListItemIcon>
-        <ListItemText primary={list.name} disableTypography={true} style={{ paddingLeft: '6px' }} className={open ? classes.focus : ''} />
-        {open ? <ExpandMoreIcon className={open ? classes.focus : ''} /> : <ChevronRightIcon />}
-      </ListItem>
-      <Collapse in={(listId === 1) && open && more} timeout="auto" unmountOnExit className={classes.collapse}>
+
+
+      {more ?
+
+        <ListItem button onClick={() => handleClick(list.id)} className={classes.item}>
+          <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+            {list.icon.more}
+          </ListItemIcon>
+          <ListItemText primary={list.name} disableTypography={true} style={{ paddingLeft: '6px' }} className={toggleList[list.id] ? classes.focus : ''} />
+          {toggleList[list.id] ? <ExpandMoreIcon className={toggleList[list.id] ? classes.focus : ''} /> : <ChevronRightIcon />}
+        </ListItem>
+
+        :
+
+        <ListItem button component={Link} to={'/test'} className={classes.item}>
+          <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
+            {list.icon.less}
+          </ListItemIcon>
+          <ListItemText primary={'Test'} disableTypography={true} />
+        </ListItem>
+
+      }
+
+      <Collapse in={toggleList[list.id] && more} timeout="auto" unmountOnExit className={classes.collapse}>
         <List component="div" disablePadding>
           {list.items.map((item, index) => {
             return <ListItem button component={Link} to={item.path} className={clsx(classes.nested)}>
@@ -288,55 +292,29 @@ export default function PrimaryList({ more }) {
   return (
     <List
       component="div" disablePadding
-      //  aria-labelledby="nested-list-subheader"
+      aria-labelledby="nested-list-subheader"
       subheader={
-        <ListSubheader component="span" id="nested-list-subheader" className={more ? classes.listSubheader : classes.hide}>
-          MAIN NAVIGATION
-          </ListSubheader>
+        <ListSubheader
+          component="span"
+          id="nested-list-subheader"
+          className={more ? classes.listSubheader : classes.hide}
+        >
+          SECONDARY
+        </ListSubheader>
       }
       className={classes.root}
     >
-
-      {renderItem(more)}
-
-      {/* {list.map((item, index) => {
-        return <ListItem button component={Link} to={item.path} key={index} className={clsx(classes.item, (item.path === currentLocation) && classes.active)}>
-          <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-            <Tooltip title={item.name} placement="right-start">{item.icon}</Tooltip>
-          </ListItemIcon>
-          <ListItemText primary={item.name} disableTypography={true} style={{ paddingLeft: '6px'}}/>
-          {item.badge}
-        </ListItem>
-      })} */}
-
-      {/* tables link */}
-      {renderList(dashboards, open, more)}
+      { renderList(components, open, more) }
+      
+      { renderList(maps, open, more) }
+      { renderItem(charts, more) }
+      { renderItem(calendar, more) }
+      {/* {renderList(examples, open, more)}
       {renderList(forms, open, more)}
-      {renderList(tables, open, more)}
-      {/* {renderList(open, tables)}
-      {renderList(open, tables)} */}
+      {renderList(tables, open, more)} */}
 
-
-
-      {renderItem(more)}
-
-
-      {/* tables link */}
-      {/* <ListItem button onClick={() => handleClick(2)} className={classes.item}>
-        <ListItemIcon className={more ? classes.iconSpace : classes.openIconSpace}>
-          <TableChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Forms" disableTypography={true} style={{ paddingLeft: '6px'}} />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={(listId === 2) && open} timeout="auto" unmountOnExit className={classes.collapse}>
-        {renderList(tables)}
-      </Collapse>
-      <Divider /> */}
-
-      {renderItem(more)}
-
-
+      
+      {/* {renderItem(more)} */}
     </List>
   );
 }

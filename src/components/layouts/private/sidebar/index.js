@@ -12,6 +12,8 @@ import { grey, blue, blueGrey } from '@material-ui/core/colors';
 
 import SlimScroller from '../../../SlimScroller';
 import PrimaryList from './primary-list.component';
+import SecondaryList from './secondary-list.component';
+import SettingList from './setting-list.component';
 import AppName from './app-name.component';
 
 const drawerWidth = 260;
@@ -126,7 +128,8 @@ const Sidebar = ({ appName, open, onOpen, onClose }) => {
 
       <SlimScroller style={{ height: 620 }}  autoHide autoHideTimeout={500} autoHideDuration={200}>
         <PrimaryList more={open} />
-        {/* <PrimaryList more={open} /> */}
+        {/* <SecondaryList more={ open } /> */}
+        {/* <SettingList more={ open } /> */}
       </SlimScroller>
 
       </div>
