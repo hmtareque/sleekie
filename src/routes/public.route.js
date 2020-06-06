@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const ProtectedRoute = props => {
-  const {layout: Layout, component: Component, ...rest } = props;
+const PublicRoute = props => {
+  const {layout: Layout, component: Component, title, ...rest } = props;
 
   return (
     <Route
@@ -17,10 +17,10 @@ const ProtectedRoute = props => {
   );
 };
 
-ProtectedRoute.propTypes = {
+PublicRoute.propTypes = {
   component: PropTypes.any.isRequired,
   layout: PropTypes.any.isRequired,
   path: PropTypes.string
 };
 
-export default ProtectedRoute;
+export default PublicRoute;
