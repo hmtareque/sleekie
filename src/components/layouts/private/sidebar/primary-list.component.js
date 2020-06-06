@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.dark,
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
+      
     }
   },
 
@@ -67,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
+    transition: '0.2s all ease-in-out',
+    '&:hover': {
+      paddingLeft: '27px',
+    }
   },
 
   nestedIcon: {
@@ -88,12 +93,17 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '20px',
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.primary.dark, 0.7),
-    },
+    transition: '0.2s all ease-in-out',
+   '&:hover': {
+     backgroundColor: fade(theme.palette.primary.dark, 0.7),
+     paddingLeft: '22px',
+   },
   },
+
   itemText: {
     paddingLeft: '6px',
+
+    
   },
 
   icon: {
@@ -159,10 +169,8 @@ export default function PrimaryList({ more }) {
       </Tooltip>,
     },
     items: [
-      { name: 'Dashboards', 'path': '/dashboard', },
-      { name: 'Examples', 'path': '/customers', },
-      { name: 'Components', 'path': '/card', },
-      { name: 'Maps', 'path': '/form', },
+      { name: 'Dashboard One', 'path': '/dashboards/one', },
+      { name: 'Dashboard Two', 'path': '/dashboards/two', },
     ]
   }
 
@@ -253,15 +261,28 @@ export default function PrimaryList({ more }) {
   }
 
   const charts = {
+    id: "charts",
     name: 'Charts',
     icon: {
-      more: <BarChartIcon className={clsx(classes.icon, currentLocation === "/charts" ? classes.focus : '')} />,
-      less: <Tooltip title="Metarial" placement="right-start" onClick={() => history.push('/tables/material')}>
-        <BarChartIcon className={clsx(classes.icon, currentLocation === "/charts" ? classes.focus : '')} />
+      more: <BarChartIcon className={clsx(classes.icon, toggleList['charts'] ? classes.focus : '')} />,
+      less: <Tooltip title="Form" placement="right-start" onClick={() => history.push('/forms/material')}>
+        <BarChartIcon className={clsx(classes.icon, toggleList['charts'] ? classes.focus : '')} />
       </Tooltip>,
     },
-    path: '/charts'
+    items: [
+      { name: 'D3', 'path': '/charts/d3', },
+      { name: 'Nivo', 'path': '/charts/nivo', },
+      { name: 'Victory', 'path': '/charts/victory', },
+      { name: 'Rechart', 'path': '/charts/rechart', },
+      { name: 'Chartjs', 'path': '/charts/chartjs', },
+      { name: 'Pivot Table', 'path': '/charts/pivot-table', },
+    ]
   }
+
+
+
+
+
 
   const calendar = {
     name: 'Calendar',
@@ -284,10 +305,13 @@ export default function PrimaryList({ more }) {
       </Tooltip>,
     },
     items: [
-      { name: 'Dashboards', 'path': '/dashboard', },
-      { name: 'Examples', 'path': '/customers', },
-      { name: 'Components', 'path': '/card', },
-      { name: 'Maps', 'path': '/form', },
+      { name: 'Users', 'path': '/auth/users', },
+      { name: 'Roles', 'path': '/auth/roles', },
+      { name: 'Register', 'path': '/register', },
+      { name: 'Forgot Password', 'path': '/auth/forgot-password', },
+      { name: 'Reset Password', 'path': '/auth/reset-password', },
+      { name: 'Simple Sign In', 'path': '/auth/simple-sign-in', },
+      { name: 'Side Sign In', 'path': '/auth/side-sign-in', },
     ]
   }
 
@@ -398,9 +422,9 @@ export default function PrimaryList({ more }) {
       }
       className={classes.root}
     >
-       { renderList(components, more) }
+      { renderList(components, more) }
       { renderList(maps, more) }
-      { renderItem(charts, more) }
+      { renderList(charts, more) }
       { renderItem(calendar, more) }
 
     </List>

@@ -6,7 +6,7 @@ import RouteWithLayout from './components/layouts/layout.component';
 import PrivateLayout from './layouts/private.layout';
 import PublicLayout from './layouts/public.layout';
 
-import Dashboard from './views/dashboard.view';
+//import Dashboard from './views/dashboard.view';
 import Customers from './views/customers.view';
 import SignupForm from './views/form.view';
 import RecipeReviewCard from './views/test.view';
@@ -24,6 +24,8 @@ import ForgotPassword from './views/auth/reset-password.view';
 
 import Help from './views/help.view';
 import NotFound from './views/errors/404';
+import DashboardOne from './views/dashboards/dashboard-one.view';
+import DashboardTwo from './views/dashboards/dashboard-two.view';
 
 const Routes = () => {
   return (
@@ -33,13 +35,13 @@ const Routes = () => {
         from="/"
         to="/dashboard"
       />
-      <RouteWithLayout
-      title="Dashboard"
-        component={Dashboard}
-        exact
-        layout={PrivateLayout}
-        path="/dashboard"
-      />
+
+
+     
+
+<RouteWithLayout title="Dashboard One" component={DashboardOne} exact layout={PrivateLayout} path="/dashboards/one" />
+<RouteWithLayout title="Dashboard Two" component={DashboardTwo} exact layout={PrivateLayout} path="/dashboards/two" />
+
       <RouteWithLayout
       title="Customers"
         component={Customers}
@@ -70,9 +72,7 @@ const Routes = () => {
 
 
 <RouteWithLayout title="Charts" component={MaterialTable} exact layout={PrivateLayout} path="/charts" />
-<RouteWithLayout title="Calendar" component={Dashboard} exact layout={PrivateLayout} path="/calendar" />
-
-      <RouteWithLayout title="Help" component={Help} exact layout={PrivateLayout} path="/help" />
+<RouteWithLayout title="Help" layout={PrivateLayout} component={Help} exact  path="/help" />
       
       
       <RouteWithLayout

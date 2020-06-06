@@ -19,6 +19,8 @@ import { useHistory } from "react-router-dom";
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
+import axios from 'axios';
+
 
 function Copyright() {
   return (
@@ -102,25 +104,88 @@ const SignIn = () => {
             initialValues={{
               email: '',
               password: '',
-              checked: false,
+             // checked: false,
             }}
             validationSchema={LoginSchema}
             onSubmit={(values, actions) => {
 
               // setSuccess(false);
-              setLoading(true);
+              setLoading(false);
+              actions.setSubmitting(false);
 
-              setTimeout(() => {
+          //    window.axios = require('axios');
 
-                //   alert(JSON.stringify(values, null, 2));
+//axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-                actions.setSubmitting(false);
+              //axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-                // setSuccess(true);
-                setLoading(false);
 
-                history.push('/dashboard');
-              }, 2000);
+              axios.defaults.baseURL = 'https://api.example.com';
+//axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+
+              axios.defaults.withCredentials = true;
+
+              
+
+              axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
+
+              console.log(values);
+
+              const v = JSON.stringify(values);
+              
+                axios.post('http://localhost:8000/login', values).then(response => {
+                  console.log(response);
+                });
+
+                // axios({
+                //   method: "POST",
+                //   url: "http://localhost:8000/login",
+                //   body: {
+                //     email: "test",
+                //     password: "test"
+                //   }
+                // }).then(response => {
+                //   console.log(response);
+                // });
+
+
+            });
+
+
+            // axios.get('http://localhost:8000/api/user').then(response => {
+            //   console.log(response);
+            // });
+
+            // axios.post('http://localhost:8000/logout').then(response => {
+            //   console.log(response);
+            // });
+
+
+                //console.log(JSON.stringify(values, null, 2));
+
+
+
+
+
+
+
+
+              // setTimeout(() => {
+
+              //   //   alert(JSON.stringify(values, null, 2));
+
+              //   actions.setSubmitting(false);
+
+              //   // setSuccess(true);
+              //   setLoading(false);
+
+              //   history.push('/dashboard');
+              // }, 2000);
+
+
+
             }} >
 
             {({ values,
