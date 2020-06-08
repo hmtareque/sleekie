@@ -34,91 +34,40 @@ const Routes = () => {
   return (
     <Switch>
 
-      {/* <Redirect
-        exact
-        from="/"
-        to="/dashboard"
-      /> */}
+      <Redirect exact from="/" to="/dashboards/one" />
 
+      <ProtectedRoute exact path="/dashboards/one" title="Dashboard One" component={DashboardOne} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/dashboards/two" title="Dashboard Two" component={DashboardTwo} layout={PrivateLayout} />
 
-     
+      <ProtectedRoute exact path="/tables/simple" title="Simple" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/tables/simple" title="Simple" component={SimpleTable} layout={PrivateLayout} />
 
-<ProtectedRoute  title="Dashboard One" component={DashboardOne} layout={PrivateLayout}  exact path="/dashboards/one" />
-<ProtectedRoute  title="Dashboard Two" component={DashboardTwo} layout={PrivateLayout}  exact path="/dashboards/two" />
+      <ProtectedRoute exact path="/tables/simple" title="Simple" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/tables/enhanced" title="Enhanced" component={EnhancedTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/tables/dense" title="Dense" component={DenseTable}  layout={PrivateLayout} />
+      <ProtectedRoute exact path="/tables/fix-head" title="Fixed Head" component={FixHeadTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/tables/material" title="Material" component={MaterialTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/tables/pivot" title="Pivot Table" component={MaterialTable} layout={PrivateLayout} />
 
-<ProtectedRoute title="Simple" component={SimpleTable} exact layout={PrivateLayout} path="/tables/simple" />
-<ProtectedRoute title="Enhanced" component={EnhancedTable} exact layout={PrivateLayout} path="/tables/enhanced" />
-<ProtectedRoute title="Dense" component={DenseTable} exact layout={PrivateLayout} path="/tables/dense" />
-<ProtectedRoute title="Fixed Head" component={FixHeadTable} exact layout={PrivateLayout} path="/tables/fix-head" />
-<ProtectedRoute title="Material" component={MaterialTable} exact layout={PrivateLayout} path="/tables/material" />
+      <ProtectedRoute exact path="/maps/google" title="Google Map" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/maps/vector" title="Vector Map" component={SimpleTable} layout={PrivateLayout} />
 
+      <ProtectedRoute exact path="/charts/d3" title="D3" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/charts/nivo" title="Nivo" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/charts/victory" title="Victory" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/charts/recharts" title="Recharts" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/charts/chartjs" title="Chartjs" component={SimpleTable} layout={PrivateLayout} />
 
+      <ProtectedRoute exact path="/calendar" title="Calendar" component={SimpleTable} layout={PrivateLayout} />
 
-      {/* <RouteWithLayout
-      title="Customers"
-        component={Customers}
-        exact
-        layout={PrivateLayout}
-        path="/customers"
-      />
-      <RouteWithLayout
-      title="Sign Up Form"
-        component={SignupForm}
-        exact
-        layout={PrivateLayout}
-        path="/form"
-      />
-      <RouteWithLayout
-        title="Card"
-        component={RecipeReviewCard}
-        exact
-        layout={PrivateLayout}
-        path="/card"
-      />
-
-
-
-<RouteWithLayout title="Charts" component={MaterialTable} exact layout={PrivateLayout} path="/charts" />
-<RouteWithLayout title="Help" layout={PrivateLayout} component={Help} exact  path="/help" />
-      
-      
-      <RouteWithLayout
-        title="Sign In"
-        component={SignIn}
-        exact
-        layout={PublicLayout}
-        path="/login"
-      />
-
-      <RouteWithLayout
-        title="Forgot Password"
-        component={ForgotPassword}
-        exact
-        layout={PublicLayout}
-        path="/reset-password"
-      />
-
-      <RouteWithLayout
-        title="Sign In Side"
-        component={SignInSide}
-        exact
-        layout={PublicLayout}
-        path="/sign-in-side"
-      />
-
- */}
-
-<PublicRoute
-        title="Sign In Side"
-        component={NotFound}
-        exact
-        layout={PrivateLayout}
-        path="/not-found"
-      />
+      <ProtectedRoute exact path="/register" title="Register" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/forget-password" title="Forgot Password" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/reset-password" title="Reset Password" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/sign-in" title="Sign In" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/side-sign-in" title="Side Sign In" component={SimpleTable} layout={PrivateLayout} />
 
       <Redirect to="/not-found" />
 
-      
     </Switch>
   );
 };

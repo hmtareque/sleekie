@@ -206,6 +206,7 @@ export default function PrimaryList({ more }) {
       { name: 'Enhanced', 'path': '/tables/enhanced', },
       { name: 'Dense', 'path': '/tables/dense', },
       { name: 'Material', 'path': '/tables/material', },
+      { name: 'Pivot', 'path': '/tables/pivot', },
     ]
   }
 
@@ -224,6 +225,7 @@ export default function PrimaryList({ more }) {
       { name: 'Enhanced', 'path': '/tables/enhanced', },
       { name: 'Dense', 'path': '/tables/dense', },
       { name: 'Material', 'path': '/tables/material', },
+      { name: 'Pivot', 'path': '/tables/pivot', },
     ]
   }
 
@@ -233,13 +235,13 @@ export default function PrimaryList({ more }) {
     name: 'Maps',
     icon: {
       more: <MapIcon className={clsx(classes.icon, toggleList['maps'] ? classes.focus : '')} />,
-      less: <Tooltip title="Dashboard" placement="right-start" onClick={() => history.push('/maps/one')}>
+      less: <Tooltip title="Google Map" placement="right-start" onClick={() => history.push('/maps/google')}>
         <MapIcon className={clsx(classes.icon, toggleList['maps'] ? classes.focus : '')} />
       </Tooltip>,
     },
     items: [
-      { name: 'Google Map', 'path': '/dashboard', },
-      { name: 'Vector Map', 'path': '/customers', },
+      { name: 'Google Map', 'path': '/maps/google', },
+      { name: 'Vector Map', 'path': '/maps/vector', },
     ]
   }
 
@@ -273,9 +275,8 @@ export default function PrimaryList({ more }) {
       { name: 'D3', 'path': '/charts/d3', },
       { name: 'Nivo', 'path': '/charts/nivo', },
       { name: 'Victory', 'path': '/charts/victory', },
-      { name: 'Rechart', 'path': '/charts/rechart', },
-      { name: 'Chartjs', 'path': '/charts/chartjs', },
-      { name: 'Pivot Table', 'path': '/charts/pivot-table', },
+      { name: 'Rechart', 'path': '/charts/recharts', },
+      { name: 'Chartjs', 'path': '/charts/chartjs', }
     ]
   }
 
@@ -305,13 +306,13 @@ export default function PrimaryList({ more }) {
       </Tooltip>,
     },
     items: [
+      { name: 'Register', 'path': '/register', },
+      { name: 'Forgot Password', 'path': '/forgot-password', },
+      { name: 'Reset Password', 'path': '/reset-password', },
+      { name: 'Simple Sign In', 'path': '/simple-sign-in', },
+      { name: 'Side Sign In', 'path': '/side-sign-in', },
       { name: 'Users', 'path': '/auth/users', },
       { name: 'Roles', 'path': '/auth/roles', },
-      { name: 'Register', 'path': '/register', },
-      { name: 'Forgot Password', 'path': '/auth/forgot-password', },
-      { name: 'Reset Password', 'path': '/auth/reset-password', },
-      { name: 'Simple Sign In', 'path': '/auth/simple-sign-in', },
-      { name: 'Side Sign In', 'path': '/auth/side-sign-in', },
     ]
   }
 
