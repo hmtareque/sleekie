@@ -30,6 +30,12 @@ import NotFound from '../views/errors/404';
 import DashboardOne from '../views/dashboards/dashboard-one.view';
 import DashboardTwo from '../views/dashboards/dashboard-two.view';
 
+/* Roles */
+import ListofRoles from '../views/auth/roles/index';
+import CreateRole from '../views/auth/roles/create';
+import EditRole from '../views/auth/roles/edit';
+import ShowRole from '../views/auth/roles/show';
+
 const Routes = () => {
   return (
     <Switch>
@@ -66,6 +72,14 @@ const Routes = () => {
       <ProtectedRoute exact path="/sign-in" title="Sign In" component={SimpleTable} layout={PrivateLayout} />
       <ProtectedRoute exact path="/side-sign-in" title="Side Sign In" component={SimpleTable} layout={PrivateLayout} />
 
+
+      
+      <ProtectedRoute exact path="/auth/roles" title="Roles" component={ListofRoles} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/auth/roles/create" title="Create New Role" component={CreateRole} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/auth/roles/:role_id" title="Role" component={SimpleTable} layout={PrivateLayout} />
+
+      <ProtectedRoute exact path="/auth/roles/:role_id/edit" title="Edit Role" component={SimpleTable} layout={PrivateLayout} />
+      
       <Redirect to="/not-found" />
 
     </Switch>
