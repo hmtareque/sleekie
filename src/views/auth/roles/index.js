@@ -1,42 +1,41 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import SimpleTable from '../../../views/tables/simple.table';
-import { RoleListNav } from '../../../components/roles/nav.component';
+import React, { Component } from "react";
+import axios from "axios";
+import SimpleTable from "../../../components/roles/list.component";
+import { RoleListNav } from "../../../components/roles/nav.component";
+import Flash from "../../../components/common/flash.component";
 
 export default class ListOfRoles extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            clients: []
-        }
-    }
+    console.log(props);
 
-    componentDidMount = () => {
-        // console.log('clients');
+    this.state = {
+      flash: props.location.state,
+      roles: [],
+    };
+  }
 
-        // axios.get('http://localhost:3001/clients').then(response => {
+  componentDidMount = () => {
+    axios
+      .get("http://localhost:3001/roles")
+      .then((response) => {
+        this.setState({
+          roles: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-        //   //  console.log(response);
-
-        //     this.setState({
-        //         clients: response.data
-        //     })
-
-        //   }).catch(error => {
-        //       console.log(error);
-        //   });
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>List of Roles</h3>
-                <RoleListNav />
-<SimpleTable />
-            </div>
-          
-        );
-    }
+  render() {
+    return (
+      <div>
+        <RoleListNav />
+        {(this.state.flash)? <Flash flash={this.state.flash} /> : false }
+        <SimpleTable data={this.state.roles} />
+      </div>
+    );
+  }
 }
-

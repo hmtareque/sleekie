@@ -17,10 +17,25 @@ export const resources = {
     }
 }
 
-export const resoures1 = [
-    ["dashboard", "Dashboard", ["create", "update", "read", "delete"]],
-    ["user", "Dashboard", ["create", "update", "read", "delete"]],
-    ["dashboard", "Dashboard", ["create", "update", "read", "delete"]],
-    ["dashboard", "Dashboard", ["create", "update", "read", "delete"]],
-    ["dashboard", "Dashboard", ["create", "update", "read", "delete"]],
-];
+export const resources1 = [
+    {
+        "id": "dashboard",
+        "name" : "Dashboard",
+        "actions": ["read"]
+    },
+    {
+        "id": "user",
+        "name" : "User",
+        "actions": ["create", "update", "read", "delete"]
+    },
+    {
+        "id": "role",
+        "name" : "Role",
+        "actions": ["create", "update", "read", "activate"]
+    },
+    {
+        "id": "post",
+        "name" : "Post",
+        "actions": ["create", "update", "read", "delete"]
+    }
+]
