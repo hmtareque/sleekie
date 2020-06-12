@@ -72,13 +72,10 @@ const Routes = () => {
       <ProtectedRoute exact path="/sign-in" title="Sign In" component={SimpleTable} layout={PrivateLayout} />
       <ProtectedRoute exact path="/side-sign-in" title="Side Sign In" component={SimpleTable} layout={PrivateLayout} />
 
-
-      
       <ProtectedRoute exact path="/auth/roles" title="Roles" component={ListofRoles} layout={PrivateLayout} />
       <ProtectedRoute exact path="/auth/roles/create" title="Create New Role" component={CreateRole} layout={PrivateLayout} />
-      <ProtectedRoute exact path="/auth/roles/:role_id" title="Role" component={SimpleTable} layout={PrivateLayout} />
-
-      <ProtectedRoute exact path="/auth/roles/:role_id/edit" title="Edit Role" component={SimpleTable} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/auth/roles/:role_id" title="Role" component={ShowRole} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/auth/roles/:role_id/edit" title="Edit Role" component={EditRole} layout={PrivateLayout} />
       
       <Redirect to="/not-found" />
 

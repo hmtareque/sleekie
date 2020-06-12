@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import SimpleTable from "../../../components/roles/list.component";
+import SimpleTable from "../../../components/roles/simple.list.component";
 import { RoleListNav } from "../../../components/roles/nav.component";
 import Flash from "../../../components/common/flash.component";
+import DetailRoleList from '../../../components/roles/detail.list.component';
 
 export default class ListOfRoles extends Component {
   constructor(props) {
@@ -34,7 +35,8 @@ export default class ListOfRoles extends Component {
       <div>
         <RoleListNav />
         {(this.state.flash)? <Flash flash={this.state.flash} /> : false }
-        <SimpleTable data={this.state.roles} />
+      
+        <DetailRoleList data={this.state.roles} />
       </div>
     );
   }

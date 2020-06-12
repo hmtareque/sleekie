@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import SimpleTable from "../../../components/roles/list.component";
-import { RoleListNav } from "../../../components/roles/nav.component";
+import RoleDetails from "../../../components/roles/details.component";
+import { ShowRoleNav } from "../../../components/roles/nav.component";
 import Flash from "../../../components/common/flash.component";
 
 export default class ShowRole extends Component {
@@ -11,17 +11,21 @@ export default class ShowRole extends Component {
     console.log(props);
 
     this.state = {
-      flash: props.location.state,
-      roles: [],
+      role_id: props.match.params.role_id,
+      role: {}
     };
   }
 
   componentDidMount = () => {
     axios
-      .get("http://localhost:3001/roles")
+      .get(`http://localhost:3001/roles/${this.state.role_id}`)
       .then((response) => {
+
+        console.log(response.data);
+
+
         this.setState({
-          roles: response.data,
+          role: response.data,
         });
       })
       .catch((error) => {
@@ -30,11 +34,15 @@ export default class ShowRole extends Component {
   };
 
   render() {
+      console.log(this.state)
     return (
       <div>
-        <RoleListNav />
-        <div></div>
+        <ShowRoleNav />
+        <RoleDetails role={this.state.role} />
       </div>
     );
   }
 }
+
+
+
