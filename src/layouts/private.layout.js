@@ -32,8 +32,6 @@ const PrivateLayout = props => {
   
   const { children } = props;
   const title = children.props.title;
-
-  console.log(children.props.title);
   
   const classes = useStyles();
   const [openSidebar, setOpenSidebar] = useState(true);

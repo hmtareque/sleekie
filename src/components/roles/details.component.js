@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -15,8 +16,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
 
 import Authorizations from './authorizations.component';
+import { Divider } from '@material-ui/core';
+
+import EditRole from '../../views/auth/roles/edit';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,18 +44,15 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  button: {
+    marginLeft: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+  },
 }));
 
 const RoleDetails = ({ role }) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  //console.log(role)
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+ 
   if(role) {
     return (
         <Card className={classes.root}>
@@ -58,6 +60,7 @@ const RoleDetails = ({ role }) => {
             title={role.name}
             subheader={`${role.created_at}`}
           />
+          <Divider />
           <CardContent>
          
     
@@ -65,23 +68,20 @@ const RoleDetails = ({ role }) => {
     
     
           </CardContent>
+          <Divider />
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
+          <Button
+          variant="outlined"
+          color="primary"
+          size="large"
+          className={classes.button}
+          component={Link}
+          to={`/auth/roles/${role._id}/edit`}
+        >
+          Edit {`${role.name}`} Role
+        </Button>
+           
+
           </CardActions>
         </Card>
       );

@@ -47,6 +47,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
+import Alert from '../../components/common/alert.component';
+
 import {
   Card,
   CardHeader,
@@ -60,7 +62,6 @@ import {
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import Alert from "@material-ui/lab/Alert";
 import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
 import CloseIcon from "@material-ui/icons/Close";
@@ -68,6 +69,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
 import { resources, resources1 } from "../../config/resources";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -135,20 +137,45 @@ const SignupSchema = Yup.object().shape({
   .required('Please provide at least one authorization.')
 });
 
-const RoleForm = () => {
+const RoleForm = ({ data }) => {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(true);
   const [open, setOpen] = React.useState(false);
 
-  const [errors, setErrors] = React.useState(false);
+  const [alert, setAlert] = React.useState({});
+  const [show, setShow] = React.useState(true);
 
-  const [showAlert, setShowAlert] = React.useState(true);
+ 
+  const role = data.role;
+  const auth = data.auth;
+
+  //console.log(role.name);
+  //console.log(auth)
+
+  const t = {
+    name: role.name,
+    //   email: '',
+    //  age: '',
+    //  position: '',
+    // checked: false,
+    //  multiline: 'default value',
+    authorizations: role.authorizations
+  }
+
+  console.log(t);
+
+
+
+
 
   const history = useHistory();
 
   const { enqueueSnackbar } = useSnackbar();
 
+
+
+  
 
 //   const [authorizations, setAuthorizations] = React.useState([]);
 
@@ -156,6 +183,8 @@ const RoleForm = () => {
     let authorizations = currentValue;
     let resourceId = e.target.name;
     let resourceAction = e.target.value;
+
+    console.log(e.target.checked)
 
     let x = {
         id: resourceId,
@@ -176,12 +205,6 @@ const RoleForm = () => {
                 actions.splice(index, 1);
             }
         }
-
-        if(actions.length <= 0) {
-          authorizations.splice(p, 1);
-        }
-
-
     } else {
         authorizations.push(x);
     }
@@ -192,18 +215,18 @@ const RoleForm = () => {
 
 
   return (
+    <div>
+     
 
+
+
+
+
+
+   
     <Card style={{ maxWidth: "600px" }}>
       <Formik
-        initialValues={{
-          name: "",
-          //   email: '',
-          //  age: '',
-          //  position: '',
-          // checked: false,
-          //  multiline: 'default value',
-          authorizations: [],
-        }}
+        initialValues={t}
         validationSchema={SignupSchema}
         onSubmit={(values, actions) => {
 
@@ -216,7 +239,7 @@ const RoleForm = () => {
           setOpen(true);
 
           axios
-            .post("http://localhost:3001/roles", values)
+            .put(`http://localhost:3001/roles/${role._id}`, values)
             .then((response) => {
            //   console.log(response);
 
@@ -224,15 +247,11 @@ const RoleForm = () => {
               setLoading(false);
               setOpen(false);
 
-          
-
-              enqueueSnackbar(`Successfully created ${response.data.role.name} role.`, {
-                variant: 'success',
-            });
-
-              history.push("/auth/roles");
-
              
+
+              enqueueSnackbar(`Successfully updated ${response.data.role.name} role.`, {
+                variant: 'success'
+              });
 
               // enqueueSnackbar('This is a success message!', {
               //     variant: "success",
@@ -243,17 +262,18 @@ const RoleForm = () => {
               // });
             })
             .catch(function (error) {
-             // console.log(error.response);
+              console.log(error.response);
 
-            //  console.log(JSON.stringify(values));
+            
 
-
-              setSuccess(false);
-              setLoading(false);
-              setOpen(false);
+              enqueueSnackbar(`Internal server error.${(new Date().getTime())}`, {
+                variant: 'error'
+              });
 
               //   actions.setErrors(error.response.data.errors);
               actions.setSubmitting(false);
+              setSuccess(false);
+              setLoading(false);
             });
         }}
       >
@@ -281,7 +301,7 @@ const RoleForm = () => {
                     <TextField
                       fullWidth
                       name="name"
-                      label="Name"
+                      label="Name 1"
                       value={values.name}
                       helperText={errors ? errors.name : ""}
                       onChange={handleChange}
@@ -322,6 +342,7 @@ const RoleForm = () => {
                                   key={index}
                                   control={
                                     <Checkbox
+                                      checked={ values.authorizations.find(item => item.id === resource.id) && values.authorizations.find(item => item.id === resource.id).actions.indexOf(action) > -1}
                                       value={action}
                                       onChange={(e) => handleAuthChange(e, resource.name, values.authorizations, setFieldValue)}
                                       name={resource.id}
@@ -343,8 +364,7 @@ const RoleForm = () => {
             </CardContent>
             <Divider />
             <CardActions>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
+
                   <div className={classes.wrapper}>
                     <Button
                       color="primary"
@@ -364,16 +384,12 @@ const RoleForm = () => {
                       />
                     )}
                   </div>
-                </Grid>
-                <Grid item xs={12}>
-                  <Flash flash={{ type: "info", msg: "Hello" }} />
-                </Grid>
-              </Grid>
             </CardActions>
           </Form>
         )}
       </Formik>
     </Card>
+    </div>
   );
 };
 
