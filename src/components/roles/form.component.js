@@ -67,7 +67,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import { SnackbarProvider, useSnackbar } from "notistack";
 
-import { resources, resources1 } from "../../config/resources";
+import { resources } from "../../config/resources";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -310,7 +310,7 @@ const RoleForm = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {resources1.map((resource, resource_index) => (
+                        {resources.map((resource, resource_index) => (
                           <TableRow key={resource_index} hover>
                             <TableCell component="th" scope="row">
                               <p>{resource.name}</p>
