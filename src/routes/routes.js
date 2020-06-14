@@ -36,6 +36,12 @@ import CreateRole from '../views/auth/roles/create';
 import EditRole from '../views/auth/roles/edit';
 import ShowRole from '../views/auth/roles/show';
 
+/* Users */
+import ListofUsers from '../views/auth/users/index';
+import CreateUser from '../views/auth/users/create';
+import EditUser from '../views/auth/users/edit';
+import ShowUser from '../views/auth/users/show';
+
 const Routes = () => {
   return (
     <Switch>
@@ -76,6 +82,11 @@ const Routes = () => {
       <ProtectedRoute exact path="/auth/roles/create" title="Create New Role" component={CreateRole} layout={PrivateLayout} />
       <ProtectedRoute exact path="/auth/roles/:role_id" title="Role" component={ShowRole} layout={PrivateLayout} />
       <ProtectedRoute exact path="/auth/roles/:role_id/edit" title="Edit Role" component={EditRole} layout={PrivateLayout} />
+      
+      <ProtectedRoute exact path="/auth/users" title="users" component={ListofUsers} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/auth/users/create" title="Create New user" component={CreateUser} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/auth/users/:user_id" title="user" component={ShowUser} layout={PrivateLayout} />
+      <ProtectedRoute exact path="/auth/users/:user_id/edit" title="Edit user" component={EditUser} layout={PrivateLayout} />
       
       <Redirect to="/not-found" />
 

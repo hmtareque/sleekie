@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import SimpleTable from "../../../components/roles/simple.list.component";
-import { RoleListNav } from "../../../components/roles/nav.component";
+import { UserListNav } from "../../../components/users/nav.component";
 import Flash from "../../../components/common/flash.component";
 import DetailRoleList from "../../../components/roles/detail.list.component";
 import Example from "../../../components/roles/datatable.list.component";
@@ -45,8 +45,8 @@ export default class ListOfRoles extends Component {
 
     return (
       <div>
-        <RoleListNav />
-        <Example />
+        <UserListNav />
+        <Example data={this.state.roles} />
       </div>
     );
   }
