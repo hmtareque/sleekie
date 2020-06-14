@@ -205,6 +205,11 @@ const RoleForm = ({ data }) => {
                 actions.splice(index, 1);
             }
         }
+
+        if(actions.length <= 0) {
+          authorizations.splice(p, 1);
+        }
+        
     } else {
         authorizations.push(x);
     }
