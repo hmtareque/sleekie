@@ -83,7 +83,6 @@ export default function DenseTable({ authorizations }) {
                             color={ color[action] ? color[action] : "default" }
                             icon={ icon[action] }
                             variant="outlined"
-                            size="small"
                           />
                     ))}
                   </div>

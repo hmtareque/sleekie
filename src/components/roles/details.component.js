@@ -11,6 +11,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Divider from "@material-ui/core/Divider";
 
 import Authorizations from "./authorizations.component";
+import DeleteRoleModal from './deletemodal.component';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +47,7 @@ const RoleDetails = ({ role }) => {
           >
             Edit {`${role.name}`} Role
           </Button>
+          <DeleteRoleModal />
         </CardActions>
       </Card>
     );
