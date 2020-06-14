@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
+import AddIcon from "@material-ui/icons/Add";
 import Divider from "@material-ui/core/Divider";
 
 import Authorizations from "./authorizations.component";
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 680,
   },
   button: {
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
 }));
@@ -36,18 +37,30 @@ const RoleDetails = ({ role }) => {
         </CardContent>
         <Divider />
         <CardActions disableSpacing>
+
+        <Button
+             variant="outlined"
+            color="primary"
+            className={classes.button}
+            startIcon={<AddIcon />}
+            component={Link}
+            to={`/auth/roles/${role._id}/edit`}
+          >
+            Create a {role.name} User
+          </Button>
+
           <Button
             variant="outlined"
             color="primary"
-            size="large"
             className={classes.button}
             startIcon={<EditIcon />}
             component={Link}
             to={`/auth/roles/${role._id}/edit`}
           >
-            Edit {`${role.name}`} Role
+            Edit
           </Button>
-          <DeleteRoleModal />
+
+          <DeleteRoleModal role={{id: role._id, name: role.name}} />
         </CardActions>
       </Card>
     );

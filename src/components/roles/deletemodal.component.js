@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -8,8 +9,16 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
 import { Divider, makeStyles } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import { useSnackbar } from "notistack";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
+    button: {
+        marginLeft: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+      },
   title: {
     padding: theme.spacing(2),
     cursor: "move",
@@ -33,9 +42,13 @@ function PaperComponent(props) {
   );
 }
 
-const DeleteRoleModal = ({ id, name }) => {
+const DeleteRoleModal = ({ role }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+
+  const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,22 +59,49 @@ const DeleteRoleModal = ({ id, name }) => {
   };
 
   const handleDeleteRole = () => {
-    setTimeout(() => {
-      console.log("delete role");
-      setOpen(false);
-    }, 2000);
+
+setSubmitting(true);
+    axios
+    .delete(`http://localhost:3001/roles/${role.id}`)
+    .then((response) => {
+
+     setSubmitting(false);
+
+      enqueueSnackbar(
+        `Successfully deleted ${role.name} role.`,
+        {
+          variant: "success",
+        }
+      );
+
+      history.push('/auth/roles');
+
+    })
+    .catch(function (error) {
+      console.log(error.response.data);
+
+      setSubmitting(false);
+
+
+      enqueueSnackbar(`Internal server error.${new Date().getTime()}`, {
+        variant: "error",
+      });
+    });
+
   };
 
   return (
     <div>
       <Button
         variant="outlined"
-        color="primary"
-        size="large"
+        color="secondary"
         onClick={handleClickOpen}
+        className={classes.button}
+        startIcon={<DeleteIcon />}
       >
         Delete
       </Button>
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -74,7 +114,7 @@ const DeleteRoleModal = ({ id, name }) => {
         <Divider />
         <DialogContent className={classes.content}>
           <DialogContentText>
-            Are you sure to delete the [Role] user role? This action is not
+  Are you sure to delete the <strong>{`${role.name}`}</strong> user role? This action is not
             reversable.
           </DialogContentText>
         </DialogContent>
@@ -92,8 +132,9 @@ const DeleteRoleModal = ({ id, name }) => {
             onClick={handleDeleteRole}
             color="secondary"
             variant="outlined"
+            disabled={submitting}
           >
-            Delete
+            { submitting ? 'Deleting ...' : 'Delete' }
           </Button>
         </DialogActions>
       </Dialog>
