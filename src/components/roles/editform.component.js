@@ -140,11 +140,16 @@ const RoleForm = ({ data }) => {
       if (actions.length <= 0) {
         authorizations.splice(p, 1);
       }
+
     } else {
       authorizations.push(x);
     }
 
     setFieldValue("authorizations", authorizations);
+
+    console.log(authorizations);
+
+
   };
 
   return (
@@ -254,14 +259,14 @@ const RoleForm = ({ data }) => {
                                   control={
                                     <Checkbox
                                       checked={
-                                        values.authorizations.find(
+                                        (values.authorizations.find(
                                           (item) => item.id === resource.id
                                         ) &&
                                         values.authorizations
                                           .find(
                                             (item) => item.id === resource.id
                                           )
-                                          .actions.indexOf(action) > -1
+                                          .actions.indexOf(action) > -1) ? true : false
                                       }
                                       value={action}
                                       onChange={(e) =>
